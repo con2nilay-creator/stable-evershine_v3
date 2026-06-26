@@ -1,0 +1,1667 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  :root{
+    --se-grad:linear-gradient(90deg,#B8902F 0%,#D4AF37 50%,#F0DCA0 100%);
+    --se-accent:#8A6D2E;
+    --se-hi:#F0DCA0;
+    --se-strong:#D4AF37;
+    --se-bg:#F7F9FC;
+    --se-bg-alt:#EEF2F8;
+    --se-ink:#0B1325;
+    --se-ink-2:#070C18;
+    --se-teal:#0B4F43;
+    --se-slate:#4A5568;
+    --se-rise:34px;
+    --se-dur:1.1s;
+  }
+  body{margin:0;font-family:'Manrope',system-ui,sans-serif;background:var(--se-bg);color:#0B1325;letter-spacing:.1px;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;transition:background-color .6s ease}
+  img{display:block;max-width:100%}
+  ::selection{background:#D4AF37;color:#0B1325}
+  ul{margin:0;padding:0;list-style:none}
+  .reveal{opacity:0;transform:translateY(var(--se-rise));transition:opacity var(--se-dur) cubic-bezier(.16,1,.3,1),transform var(--se-dur) cubic-bezier(.16,1,.3,1);will-change:opacity,transform}
+  .reveal.in{opacity:1;transform:none}
+  .d1{transition-delay:.09s}.d2{transition-delay:.18s}.d3{transition-delay:.27s}.d4{transition-delay:.36s}.d5{transition-delay:.45s}
+  @keyframes seZoom{from{transform:scale(1.14)}to{transform:scale(1)}}
+  @keyframes seFloatY{0%,100%{transform:translateY(0)}50%{transform:translateY(8px)}}
+  @keyframes seShimmer{0%{background-position:-160% 0}100%{background-position:260% 0}}
+  @keyframes seNavShimmer{0%{background-position:-150% 0}100%{background-position:250% 0}}
+  @keyframes seHeroVid{from{transform:scale(1.10)}to{transform:scale(1.04)}}
+  @keyframes seOverlayIn{from{opacity:0}to{opacity:1}}
+  @keyframes seDrawerIn{from{transform:translateX(100%)}to{transform:translateX(0)}}
+  @keyframes seMenuIn{from{opacity:0;transform:translateX(-30%) translateY(-8px)}to{opacity:1;transform:translateX(-30%) translateY(0)}}
+  @keyframes seRayDrift{0%{transform:translateX(-6%) skewX(-12deg);opacity:.45}50%{opacity:.8}100%{transform:translateX(6%) skewX(-12deg);opacity:.45}}
+  @keyframes seFog{0%,100%{transform:translate3d(-2%,0,0) scale(1.05)}50%{transform:translate3d(3%,-2%,0) scale(1.12)}}
+  @keyframes seLogoIn{0%{opacity:0;transform:scale(.95)}55%{opacity:1}100%{opacity:1;transform:scale(1)}}
+  @keyframes seBloom{0%{opacity:0;transform:translate(-50%,-50%) scale(.4)}60%{opacity:.95}100%{opacity:0;transform:translate(-50%,-50%) scale(2.6)}}
+  @keyframes seSweep{0%{transform:translateX(-140%) skewX(-18deg)}100%{transform:translateX(240%) skewX(-18deg)}}
+  @keyframes seCurtainTop{0%,42%{transform:translateY(0)}100%{transform:translateY(-101%)}}
+  @keyframes seCurtainBot{0%,42%{transform:translateY(0)}100%{transform:translateY(101%)}}
+  @keyframes seWipe{0%,40%{transform:translateX(0)}100%{transform:translateX(110%)}}
+  @keyframes seItemIn{0%{opacity:0;transform:translateX(-10px)}100%{opacity:1;transform:translateX(0)}}
+  @keyframes sePageIn{0%{opacity:0;transform:translateY(46px) scale(.985)}100%{opacity:1;transform:translateY(0) scale(1)}}
+  @keyframes sePageCurtain{0%{transform:translateY(0)}100%{transform:translateY(-101%)}}
+  @keyframes sePageRise{0%{opacity:0;transform:translateY(34px)}100%{opacity:1;transform:translateY(0)}}
+  .reveal-mask{clip-path:inset(0 0 100% 0);transition:clip-path 1.25s cubic-bezier(.16,1,.3,1)}
+  .reveal-mask.in{clip-path:inset(0 0 0% 0)}
+  [data-tilt]{transition:transform .45s cubic-bezier(.16,1,.3,1)}
+  @media(hover:none){[data-tilt]{transform:none !important}}
+  ::-webkit-scrollbar{width:11px}::-webkit-scrollbar-track{background:#EEF2F8}::-webkit-scrollbar-thumb{background:#c4ad6a;border-radius:9px;border:3px solid #EEF2F8}
+  @media(max-width:1000px){
+    .se-2col{grid-template-columns:1fr !important}
+    .se-stats{grid-template-columns:1fr 1fr !important;row-gap:36px !important}
+    .se-news{grid-template-columns:1fr 1fr !important}
+    .se-foot{grid-template-columns:1fr 1fr !important;gap:36px !important}
+    .se-amen{grid-template-columns:repeat(2,1fr) !important;grid-auto-rows:200px !important}
+    .se-amen figure{grid-column:span 1 !important;grid-row:span 1 !important}
+    .se-search-grid{grid-template-columns:1fr 1fr !important}
+    .se-search-grid>button{grid-column:span 2}
+    .se-page-stats{grid-template-columns:1fr 1fr !important;row-gap:18px}
+    .se-why{grid-template-columns:1fr 1fr !important}
+    .se-test{grid-template-columns:1fr !important}
+  }
+  @media(max-width:860px){
+    .se-nav-search{display:none !important}
+  }
+  @media(max-width:760px){
+    .se-desktop-nav{display:none !important}
+    .se-burger{display:flex !important}
+    .se-news{grid-template-columns:1fr !important}
+    .se-stats{grid-template-columns:1fr 1fr !important}
+    .se-foot{grid-template-columns:1fr 1fr !important}
+    .se-amen{grid-template-columns:1fr !important}
+    .se-search-grid{grid-template-columns:1fr !important}
+    .se-search-grid>label{border-left:0 !important}
+    .se-search-grid>button{grid-column:span 1;padding:16px !important}
+    .se-why{grid-template-columns:1fr !important}
+  }
+  @media(max-width:480px){
+    .se-page-stats{grid-template-columns:1fr 1fr !important}
+    .se-stats{grid-template-columns:1fr 1fr !important}
+    .se-page-sec{gap:20px !important}
+    .se-amen{grid-auto-rows:170px !important}
+    .se-page-cta{width:100%}
+    .se-page-cta>button{flex:1 1 100% !important;text-align:center}
+    .se-foot{grid-template-columns:1fr !important}
+    .se-why{grid-template-columns:1fr !important}
+    .se-2col{gap:28px !important}
+    .se-news{grid-template-columns:1fr !important}
+  }
+</style>
+</helmet>
+
+<template id="__bundler_thumbnail"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="#0B1325"/><path d="M30 68 A20 20 0 0 1 70 68 Z" fill="url(#g)"/><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F0DCA0"/><stop offset="1" stop-color="#D4AF37"/></linearGradient></defs></svg></template>
+
+<div style="position:relative;overflow-x:hidden;background:var(--se-bg)">
+
+  <!-- scroll progress -->
+  <div style="position:fixed;top:0;left:0;height:3px;z-index:75;background:var(--se-grad);box-shadow:0 0 12px rgba(212,175,55,.6);width:{{ scrollPct }};transition:width .12s linear;pointer-events:none"></div>
+
+  <!-- premium intro loader -->
+  <sc-if value="{{ loading }}" hint-placeholder-val="{{ true }}">
+    <div style="{{ loaderStyle }}">
+      <sc-if value="{{ introBloom }}" hint-placeholder-val="{{ false }}">
+        <div style="position:absolute;left:50%;top:50%;width:62vmin;height:62vmin;border-radius:9999px;background:radial-gradient(circle,rgba(212,175,55,.5),rgba(240,220,160,.12) 46%,transparent 70%);animation:seBloom 2s cubic-bezier(.16,1,.3,1) both;pointer-events:none"></div>
+      </sc-if>
+      <div style="position:relative;display:flex;flex-direction:column;align-items:center;gap:22px;animation:seLogoIn 1.5s cubic-bezier(.16,1,.3,1) both">
+        <div style="position:relative;overflow:hidden;border-radius:6px">
+          <svg width="80" height="80" viewBox="0 0 48 48" aria-hidden="true" style="filter:drop-shadow(0 8px 30px rgba(212,175,55,.55))">
+            <defs><linearGradient id="se-mark-load" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#B8902F"/><stop offset=".5" stop-color="#D4AF37"/><stop offset="1" stop-color="#F0DCA0"/></linearGradient></defs>
+            <path d="M5.5 35 A18.5 18.5 0 0 1 42.5 35 Z" fill="url(#se-mark-load)"/>
+            <g stroke="#0B1325" stroke-width="1.5" stroke-linecap="round" opacity=".8"><line x1="24" y1="35" x2="9.3" y2="17.7"/><line x1="24" y1="35" x2="16.5" y2="13.3"/><line x1="24" y1="35" x2="24" y2="11.8"/><line x1="24" y1="35" x2="31.5" y2="13.3"/><line x1="24" y1="35" x2="38.7" y2="17.7"/></g>
+          </svg>
+          <sc-if value="{{ introSweep }}" hint-placeholder-val="{{ false }}">
+            <span style="position:absolute;top:-10%;left:0;width:45%;height:120%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.9),transparent);animation:seSweep 1.6s ease-in-out .35s infinite"></span>
+          </sc-if>
+        </div>
+        <span style="font-size:16px;font-weight:600;letter-spacing:.4em;color:#F7F9FC;padding-left:.4em">STABLE<span style="font-weight:300"> EVERSHINE</span></span>
+        <span style="position:relative;width:130px;height:2px;background:rgba(247,249,252,.16);overflow:hidden;border-radius:2px"><span style="position:absolute;left:0;top:0;width:45%;height:100%;background:linear-gradient(90deg,transparent,#F0DCA0,transparent);animation:seSweep 1.5s ease-in-out infinite"></span></span>
+      </div>
+    </div>
+  </sc-if>
+
+  <div id="se-glow" style="position:fixed;top:0;left:0;width:460px;height:460px;border-radius:9999px;pointer-events:none;z-index:62;opacity:0;background:radial-gradient(circle, rgba(212,175,55,.15), rgba(240,220,160,.07) 36%, transparent 64%);mix-blend-mode:screen;filter:blur(15px);transition:opacity .5s"></div>
+
+  <!-- ============ DEDICATED PAGE (About) ============ -->
+  <sc-if value="{{ pageOpen }}" hint-placeholder-val="{{ false }}">
+    <div id="se-page-scroll" style="{{ pageWrapStyle }}">
+      <div aria-hidden="true" style="position:fixed;inset:0;z-index:5;background:linear-gradient(135deg,#0B1325,#15203a);animation:sePageCurtain .85s cubic-bezier(.76,0,.24,1) .15s forwards;pointer-events:none"></div>
+
+      <header style="position:sticky;top:0;z-index:6;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:18px clamp(24px,6vw,72px);background:rgba(247,249,252,.82);backdrop-filter:saturate(160%) blur(16px);-webkit-backdrop-filter:saturate(160%) blur(16px);border-bottom:1px solid rgba(11,19,37,.07)">
+        <button onClick="{{ closePage }}" style="display:flex;align-items:center;gap:11px;background:transparent;border:0;cursor:pointer;font-family:inherit;font-size:14px;font-weight:600;color:#0B1325;letter-spacing:.01em" style-hover="opacity:.65">
+          <span style="width:34px;height:34px;border-radius:9999px;border:1px solid rgba(11,19,37,.2);display:flex;align-items:center;justify-content:center;font-size:16px">←</span>
+          Back to home
+        </button>
+        <a href="#top" onClick="{{ closePage }}" style="display:flex;align-items:center;text-decoration:none">
+          <span style="font-size:13px;font-weight:600;letter-spacing:.26em;color:#0B1325">STABLE<span style="font-weight:300"> EVERSHINE</span></span>
+        </a>
+      </header>
+
+      <!-- page hero band -->
+      <section style="position:relative;overflow:hidden;background:#0B1325;color:#FAF8F3;padding:clamp(70px,9vw,120px) clamp(24px,6vw,72px) clamp(60px,7vw,90px)">
+        <div aria-hidden="true" style="position:absolute;top:-30%;right:-6%;width:46%;height:150%;background:radial-gradient(circle,rgba(212,175,55,.18),transparent 60%);filter:blur(26px);pointer-events:none"></div>
+        <div aria-hidden="true" style="position:absolute;top:-25%;left:14%;width:15%;height:160%;background:linear-gradient(180deg,rgba(240,220,160,.10),transparent 70%);filter:blur(12px);transform:skewX(-12deg);mix-blend-mode:screen;pointer-events:none;animation:seRayDrift 18s ease-in-out infinite"></div>
+        <div style="position:relative;max-width:1180px;margin:0 auto;width:100%">
+          <div style="display:flex;align-items:center;gap:14px;margin-bottom:22px;animation:sePageRise .6s cubic-bezier(.16,1,.3,1) both">
+            <span style="width:38px;height:2px;background:var(--se-grad)"></span>
+            <span style="font-size:12px;font-weight:600;letter-spacing:.32em;text-transform:uppercase;color:var(--se-hi)">{{ page.eyebrow }}</span>
+          </div>
+          <h1 style="margin:0;max-width:18ch;font-weight:300;font-size:clamp(34px,5.2vw,68px);line-height:1.04;letter-spacing:-.025em;text-wrap:balance;animation:sePageRise .7s cubic-bezier(.16,1,.3,1) .08s both">{{ page.title }}</h1>
+          <p style="margin:26px 0 0;max-width:60ch;color:rgba(250,248,243,.8);font-size:clamp(16px,1.5vw,19px);line-height:1.7;font-weight:300;animation:sePageRise .7s cubic-bezier(.16,1,.3,1) .16s both">{{ page.intro }}</p>
+          <sc-if value="{{ pageHasChips }}" hint-placeholder-val="{{ false }}">
+            <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:26px;animation:sePageRise .7s cubic-bezier(.16,1,.3,1) .22s both">
+              <sc-for list="{{ page.chips }}" as="ch" hint-placeholder-count="3">
+                <span style="font-size:11.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--se-hi);background:rgba(212,175,55,.12);border:1px solid rgba(240,220,160,.28);padding:9px 16px;border-radius:9999px">{{ ch }}</span>
+              </sc-for>
+            </div>
+          </sc-if>
+        </div>
+      </section>
+
+      <!-- feature banner -->
+      <sc-if value="{{ pageHasBanner }}" hint-placeholder-val="{{ false }}">
+      <section style="max-width:1180px;margin:0 auto;width:100%;padding:clamp(36px,5vw,60px) clamp(24px,6vw,72px) 0">
+        <div class="reveal" data-tilt="3" style="position:relative;transform-style:preserve-3d;border-radius:12px;overflow:hidden;box-shadow:0 60px 110px -60px rgba(11,19,37,.6)">
+          <img class="reveal-mask" data-src="{{ page.hero }}" loading="lazy" alt="{{ page.title }}" style="width:100%;height:clamp(280px,38vw,480px);object-fit:cover;display:block;background:#0B1325;transition:transform 1.2s cubic-bezier(.16,1,.3,1)" style-hover="transform:scale(1.05)"/>
+          <div aria-hidden="true" style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(7,12,24,.45));pointer-events:none"></div>
+          <div aria-hidden="true" style="position:absolute;left:24px;bottom:22px;display:flex;align-items:center;gap:10px">
+            <span style="width:30px;height:2px;background:var(--se-grad)"></span>
+            <span style="font-size:11px;font-weight:600;letter-spacing:.28em;text-transform:uppercase;color:var(--se-hi)">{{ page.eyebrow }}</span>
+          </div>
+        </div>
+      </section>
+      </sc-if>
+
+      <!-- stats -->
+      <sc-if value="{{ pageHasStats }}" hint-placeholder-val="{{ false }}">
+      <section style="max-width:1180px;margin:0 auto;width:100%;padding:clamp(46px,6vw,72px) clamp(24px,6vw,72px) 0">
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:18px" class="se-page-stats">
+          <sc-for list="{{ page.stats }}" as="st" hint-placeholder-count="4">
+            <div class="reveal" style="padding:26px 22px;border-radius:10px;background:#fff;border:1px solid rgba(11,19,37,.06);box-shadow:0 30px 60px -50px rgba(11,19,37,.5)">
+              <div style="font-size:clamp(28px,3.2vw,42px);font-weight:600;letter-spacing:-.02em;background:var(--se-grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent">{{ st.k }}</div>
+              <div style="margin-top:6px;font-size:13px;font-weight:500;letter-spacing:.04em;text-transform:uppercase;color:var(--se-slate)">{{ st.v }}</div>
+            </div>
+          </sc-for>
+        </div>
+      </section>
+      </sc-if>
+
+      <!-- project cards -->
+      <sc-if value="{{ pageHasCards }}" hint-placeholder-val="{{ false }}">
+      <section style="max-width:1180px;margin:0 auto;width:100%;padding:clamp(46px,6vw,72px) clamp(24px,6vw,72px) 0">
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px">
+          <sc-for list="{{ pageCards }}" as="cd" hint-placeholder-count="2">
+            <article class="reveal" data-tilt="5" style="position:relative;transform-style:preserve-3d;border-radius:12px;overflow:hidden;background:#fff;border:1px solid rgba(11,19,37,.06);box-shadow:0 40px 80px -55px rgba(11,19,37,.5);display:flex;flex-direction:column;transition:box-shadow .5s" style-hover="box-shadow:0 52px 96px -48px rgba(11,19,37,.6)">
+              <div style="position:relative;height:230px;overflow:hidden">
+                <img class="reveal-mask" data-src="{{ cd.img }}" loading="lazy" alt="{{ cd.name }}" style="width:100%;height:100%;object-fit:cover;transition:transform 1.1s cubic-bezier(.16,1,.3,1)" style-hover="transform:scale(1.07)"/>
+                <span style="position:absolute;left:16px;top:16px;background:rgba(7,12,24,.55);backdrop-filter:blur(8px);border:1px solid rgba(240,220,160,.3);color:var(--se-hi);font-size:10.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;padding:8px 14px;border-radius:9999px">{{ cd.status }}</span>
+              </div>
+              <div style="padding:24px 24px 26px;display:flex;flex-direction:column;flex:1">
+                <div style="font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--se-accent);font-weight:600">{{ cd.loc }}</div>
+                <h3 style="margin:8px 0 0;font-size:22px;font-weight:600;letter-spacing:-.01em;color:#0B1325">{{ cd.name }} <span style="font-weight:300;color:#9A9A9A;font-size:15px">{{ cd.sub }}</span></h3>
+                <p style="margin:12px 0 0;font-size:14.5px;line-height:1.65;color:var(--se-slate);flex:1">{{ cd.desc }}</p>
+                <button onClick="{{ cd.open }}" style="margin-top:20px;align-self:flex-start;cursor:pointer;font-family:inherit;font-size:13.5px;font-weight:600;color:#0B1325;padding:12px 24px;border:0;border-radius:9999px;background:var(--se-grad);box-shadow:0 14px 32px -16px rgba(212,175,55,.7);transition:filter .3s,box-shadow .3s" style-hover="filter:brightness(1.06);box-shadow:0 18px 40px -14px rgba(212,175,55,.95)">View project →</button>
+              </div>
+            </article>
+          </sc-for>
+        </div>
+      </section>
+      </sc-if>
+
+      <!-- body sections -->
+      <sc-if value="{{ pageHasSections }}" hint-placeholder-val="{{ false }}">
+      <section style="max-width:1180px;margin:0 auto;width:100%;padding:clamp(46px,6vw,80px) clamp(24px,6vw,72px) 0;display:grid;gap:clamp(34px,5vw,56px)">
+        <sc-for list="{{ pageSections }}" as="sec" hint-placeholder-count="3">
+          <div style="{{ sec.rowStyle }}" class="se-page-sec">
+            <div class="reveal" style="{{ sec.textWrap }}">
+              <h2 style="margin:0;font-size:clamp(22px,2.4vw,32px);font-weight:500;letter-spacing:-.02em;color:#0B1325;text-wrap:balance">{{ sec.h }}</h2>
+              <p style="margin:18px 0 0;font-size:clamp(15px,1.3vw,17px);line-height:1.8;color:var(--se-slate);font-weight:400">{{ sec.p }}</p>
+            </div>
+            <div class="reveal d1" data-tilt="4" style="{{ sec.imgWrap }}">
+              <img class="reveal-mask" data-src="{{ sec.img }}" loading="lazy" alt="{{ sec.h }}" style="{{ sec.imgStyle }}" style-hover="transform:scale(1.04)"/>
+            </div>
+          </div>
+        </sc-for>
+      </section>
+      </sc-if>
+
+      <!-- amenities -->
+      <sc-if value="{{ pageHasAmen }}" hint-placeholder-val="{{ false }}">
+      <section style="max-width:1180px;margin:0 auto;width:100%;padding:clamp(46px,6vw,72px) clamp(24px,6vw,72px) 0">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:26px">
+          <span style="width:34px;height:2px;background:var(--se-grad)"></span>
+          <span style="font-size:12px;font-weight:600;letter-spacing:.28em;text-transform:uppercase;color:var(--se-accent)">Amenities</span>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px">
+          <sc-for list="{{ pageAmen }}" as="am" hint-placeholder-count="6">
+            <figure class="reveal" style="margin:0;position:relative;overflow:hidden;border-radius:10px;height:220px">
+              <img data-src="{{ am.img }}" loading="lazy" alt="{{ am.t }}" style="width:100%;height:100%;object-fit:cover;transition:transform 1.1s cubic-bezier(.16,1,.3,1)" style-hover="transform:scale(1.07)"/>
+              <figcaption style="position:absolute;left:0;right:0;bottom:0;padding:18px;color:#FAF8F3;background:linear-gradient(0deg,rgba(7,12,24,.82),transparent)"><span style="font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--se-hi);font-weight:600">{{ am.tag }}</span><span style="display:block;font-size:17px;font-weight:500;margin-top:4px">{{ am.t }}</span></figcaption>
+            </figure>
+          </sc-for>
+        </div>
+      </section>
+      </sc-if>
+
+      <!-- floor plans -->
+      <sc-if value="{{ pageHasFloor }}" hint-placeholder-val="{{ false }}">
+      <section style="max-width:1180px;margin:0 auto;width:100%;padding:clamp(46px,6vw,72px) clamp(24px,6vw,72px) 0">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:26px">
+          <span style="width:34px;height:2px;background:var(--se-grad)"></span>
+          <span style="font-size:12px;font-weight:600;letter-spacing:.28em;text-transform:uppercase;color:var(--se-accent)">Floor Plans</span>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px">
+          <sc-for list="{{ pageFloor }}" as="fp" hint-placeholder-count="3">
+            <div class="reveal" style="border:1px solid rgba(11,19,37,.1);border-radius:12px;overflow:hidden;background:#fff">
+              <div style="height:180px;background:repeating-linear-gradient(45deg,#eef1f6,#eef1f6 12px,#e6eaf1 12px,#e6eaf1 24px);display:flex;align-items:center;justify-content:center;position:relative;border-bottom:1px solid rgba(11,19,37,.07)">
+                <span style="font-family:ui-monospace,Menlo,monospace;font-size:11px;letter-spacing:.04em;color:#8a93a6;background:rgba(255,255,255,.78);padding:7px 12px;border-radius:5px;border:1px dashed rgba(138,147,166,.5)">[ {{ fp.t }} plan ]</span>
+              </div>
+              <div style="padding:20px 22px">
+                <div style="display:flex;justify-content:space-between;align-items:baseline;gap:10px"><h3 style="margin:0;font-size:19px;font-weight:600;color:#0B1325">{{ fp.t }}</h3><span style="font-size:13.5px;color:var(--se-accent);font-weight:600;white-space:nowrap">{{ fp.a }}</span></div>
+                <p style="margin:10px 0 0;font-size:14px;line-height:1.6;color:var(--se-slate)">{{ fp.d }}</p>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </section>
+      </sc-if>
+
+      <!-- gallery -->
+      <sc-if value="{{ pageHasGallery }}" hint-placeholder-val="{{ false }}">
+      <section style="max-width:1180px;margin:0 auto;width:100%;padding:clamp(46px,6vw,72px) clamp(24px,6vw,72px) 0">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:26px">
+          <span style="width:34px;height:2px;background:var(--se-grad)"></span>
+          <span style="font-size:12px;font-weight:600;letter-spacing:.28em;text-transform:uppercase;color:var(--se-accent)">Gallery</span>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px">
+          <sc-for list="{{ pageGallery }}" as="g" hint-placeholder-count="6">
+            <figure class="reveal" style="margin:0;position:relative;overflow:hidden;border-radius:10px;height:240px">
+              <img data-src="{{ g.img }}" loading="lazy" alt="{{ g.t }}" style="width:100%;height:100%;object-fit:cover;transition:transform 1.1s cubic-bezier(.16,1,.3,1)" style-hover="transform:scale(1.06)"/>
+              <figcaption style="position:absolute;left:0;right:0;bottom:0;padding:16px;color:#FAF8F3;background:linear-gradient(0deg,rgba(7,12,24,.78),transparent);font-size:13px;font-weight:500">{{ g.t }}</figcaption>
+            </figure>
+          </sc-for>
+        </div>
+      </section>
+      </sc-if>
+
+      <!-- location benefits -->
+      <sc-if value="{{ pageHasLoc }}" hint-placeholder-val="{{ false }}">
+      <section style="max-width:1180px;margin:0 auto;width:100%;padding:clamp(46px,6vw,72px) clamp(24px,6vw,72px) 0">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:22px">
+          <span style="width:34px;height:2px;background:var(--se-grad)"></span>
+          <span style="font-size:12px;font-weight:600;letter-spacing:.28em;text-transform:uppercase;color:var(--se-accent)">Location Benefits</span>
+        </div>
+        <ul class="reveal" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:0 40px">
+          <sc-for list="{{ pageLoc }}" as="lc" hint-placeholder-count="6">
+            <li style="display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px 4px;border-bottom:1px solid rgba(11,19,37,.1)">
+              <span style="display:flex;align-items:center;gap:14px"><span style="font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--se-accent);font-weight:600;width:70px">{{ lc.tag }}</span><span style="font-size:15px;color:#0B1325;font-weight:500">{{ lc.name }}</span></span>
+              <span style="font-size:14px;color:#9A9A9A;font-variant-numeric:tabular-nums;white-space:nowrap">{{ lc.time }}</span>
+            </li>
+          </sc-for>
+        </ul>
+      </section>
+      </sc-if>
+
+      <!-- blog posts -->
+      <sc-if value="{{ pageHasPosts }}" hint-placeholder-val="{{ false }}">
+      <section style="max-width:1180px;margin:0 auto;width:100%;padding:clamp(46px,6vw,72px) clamp(24px,6vw,72px) 0">
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px">
+          <sc-for list="{{ pagePosts }}" as="po" hint-placeholder-count="6">
+            <article class="reveal" data-tilt="6" style="border:1px solid rgba(11,19,37,.08);border-radius:10px;overflow:hidden;background:#fff;transition:box-shadow .5s" style-hover="box-shadow:0 40px 70px -45px rgba(11,19,37,.5)">
+              <div style="position:relative;height:190px;overflow:hidden"><img data-src="{{ po.img }}" loading="lazy" alt="{{ po.title }}" style="width:100%;height:100%;object-fit:cover;transition:transform 1s cubic-bezier(.16,1,.3,1)" style-hover="transform:scale(1.06)"/><span style="position:absolute;left:14px;top:14px;background:rgba(7,12,24,.62);backdrop-filter:blur(6px);color:var(--se-hi);font-size:10.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;padding:7px 13px;border-radius:9999px">{{ po.cat }}</span></div>
+              <div style="padding:22px 20px 24px"><div style="font-size:12px;color:#9A9A9A">{{ po.date }} · {{ po.read }}</div><h3 style="margin:10px 0 0;font-size:18px;font-weight:500;line-height:1.34;color:#0B1325;text-wrap:pretty">{{ po.title }}</h3></div>
+            </article>
+          </sc-for>
+        </div>
+      </section>
+      </sc-if>
+
+      <!-- legal text -->
+      <sc-if value="{{ pageHasLegal }}" hint-placeholder-val="{{ false }}">
+      <section style="max-width:820px;margin:0 auto;width:100%;padding:clamp(40px,5vw,64px) clamp(24px,6vw,72px) 0;display:grid;gap:30px">
+        <sc-for list="{{ pageLegal }}" as="lg" hint-placeholder-count="4">
+          <div class="reveal">
+            <h2 style="margin:0;font-size:clamp(19px,2vw,24px);font-weight:600;color:#0B1325;letter-spacing:-.01em">{{ lg.h }}</h2>
+            <p style="margin:12px 0 0;font-size:15.5px;line-height:1.8;color:var(--se-slate)">{{ lg.p }}</p>
+          </div>
+        </sc-for>
+      </section>
+      </sc-if>
+
+      <!-- contact / book form -->
+      <sc-if value="{{ pageHasForm }}" hint-placeholder-val="{{ false }}">
+      <section style="max-width:1180px;margin:0 auto;width:100%;padding:clamp(46px,6vw,72px) clamp(24px,6vw,72px) 0">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,4vw,56px);align-items:start" class="se-2col">
+          <div class="reveal">
+            <h2 style="margin:0;font-size:clamp(22px,2.4vw,30px);font-weight:500;color:#0B1325;letter-spacing:-.01em">{{ pageForm.heading }}</h2>
+            <p style="margin:16px 0 0;font-size:15.5px;line-height:1.75;color:var(--se-slate)">{{ pageForm.sub }}</p>
+            <div style="display:grid;gap:16px;margin-top:28px">
+              <sc-for list="{{ pageForm.info }}" as="inf" hint-placeholder-count="3">
+                <div style="display:flex;gap:14px;align-items:flex-start"><span style="flex:none;width:36px;height:36px;border-radius:9999px;background:linear-gradient(135deg,rgba(212,175,55,.14),rgba(240,220,160,.22));display:flex;align-items:center;justify-content:center;color:var(--se-accent);font-size:14px;font-weight:700">{{ inf.icon }}</span><span><span style="display:block;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--se-accent);font-weight:600">{{ inf.label }}</span><span style="display:block;font-size:15px;color:#0B1325;margin-top:3px">{{ inf.value }}</span></span></div>
+              </sc-for>
+            </div>
+            <div class="reveal" style="margin-top:26px;position:relative;border-radius:10px;overflow:hidden;height:200px;background:repeating-linear-gradient(45deg,#e7ddca,#e7ddca 14px,#ece3d2 14px,#ece3d2 28px);border:1px solid rgba(43,43,43,.08)"><div style="position:absolute;left:54%;top:42%;width:16px;height:16px;border-radius:9999px;background:var(--se-strong);box-shadow:0 0 0 7px rgba(212,175,55,.22)"></div><div style="position:absolute;left:16px;bottom:16px;font-family:ui-monospace,Menlo,monospace;font-size:11px;color:#8a7c5f;background:rgba(250,248,243,.7);padding:7px 11px;border-radius:5px;border:1px dashed rgba(138,124,95,.5)">[ map embed → experience centre ]</div></div>
+          </div>
+          <form onSubmit="{{ submitForm }}" class="reveal d1" style="background:#fff;border:1px solid rgba(11,19,37,.07);border-radius:14px;padding:clamp(24px,3vw,34px);box-shadow:0 40px 80px -55px rgba(11,19,37,.5)">
+            <sc-if value="{{ sent }}" hint-placeholder-val="{{ false }}">
+              <div style="text-align:center;padding:30px 6px">
+                <div style="width:64px;height:64px;margin:0 auto;border-radius:9999px;background:var(--se-grad);display:flex;align-items:center;justify-content:center;color:#fff;font-size:30px">✓</div>
+                <h3 style="margin:20px 0 0;font-size:22px;font-weight:500">Thank you.</h3>
+                <p style="margin:12px 0 0;font-size:15px;color:var(--se-slate);line-height:1.6">{{ pageForm.success }}</p>
+              </div>
+            </sc-if>
+            <sc-if value="{{ notSent }}" hint-placeholder-val="{{ true }}">
+            <div>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+                <label style="{{ fieldLabelWide }}">Full name<input required name="name" placeholder="Your name" style="{{ inputStyle }}"/></label>
+                <label style="{{ fieldLabel }}">Phone<input required name="phone" type="tel" placeholder="+91" style="{{ inputStyle }}"/></label>
+                <label style="{{ fieldLabel }}">Email<input required name="email" type="email" placeholder="you@email.com" style="{{ inputStyle }}"/></label>
+                <sc-if value="{{ pageIsBook }}" hint-placeholder-val="{{ false }}">
+                  <label style="{{ fieldLabel }}">Preferred date<input name="date" type="date" style="{{ inputStyle }}"/></label>
+                  <label style="{{ fieldLabel }}">Time slot<select name="slot" style="{{ inputStyle }}"><option>Morning (10–12)</option><option>Afternoon (12–4)</option><option>Evening (4–7)</option></select></label>
+                </sc-if>
+                <label style="{{ fieldLabelWide }}">Interested in<select name="project" style="{{ inputStyle }}"><option>Kinara — Andheri West</option><option>Evershine Avenue — Powai</option><option>Future launches</option></select></label>
+                <label style="{{ fieldLabelWide }}">Message <span style="color:#bbb;font-weight:400;text-transform:none;letter-spacing:0">(optional)</span><textarea name="msg" rows="3" placeholder="Tell us what you're looking for…" style="{{ textareaStyle }}"></textarea></label>
+              </div>
+              <button type="submit" style="margin-top:20px;width:100%;cursor:pointer;font-family:inherit;font-size:15px;font-weight:600;color:#0B1325;padding:16px;border:0;border-radius:9999px;background:var(--se-grad);box-shadow:0 18px 40px -20px rgba(212,175,55,.6)" style-hover="filter:brightness(1.06)">{{ pageForm.submit }}</button>
+            </div>
+            </sc-if>
+          </form>
+        </div>
+      </section>
+      </sc-if>
+
+      <!-- page CTA row -->
+      <section style="max-width:1180px;margin:0 auto;width:100%;padding:clamp(46px,6vw,80px) clamp(24px,6vw,72px) clamp(70px,9vw,120px)">
+        <div class="se-page-cta" style="display:flex;flex-wrap:wrap;gap:14px;align-items:center">
+          <button onClick="{{ openBook }}" style="cursor:pointer;font-family:inherit;font-size:14.5px;font-weight:600;color:#0B1325;padding:16px 30px;border-radius:9999px;border:0;background:var(--se-grad);box-shadow:0 18px 44px -18px rgba(212,175,55,.7);transition:filter .3s ease, box-shadow .3s ease" style-hover="filter:brightness(1.06);box-shadow:0 22px 50px -16px rgba(212,175,55,.9)">Book a Site Visit</button>
+          <button onClick="{{ openModal }}" style="cursor:pointer;font-family:inherit;font-size:14.5px;font-weight:500;color:#0B1325;padding:16px 30px;border-radius:9999px;background:transparent;border:1px solid rgba(11,19,37,.2);transition:background .3s ease" style-hover="background:rgba(11,19,37,.04)">Enquire Now</button>
+          <button onClick="{{ closePage }}" style="cursor:pointer;font-family:inherit;font-size:14.5px;font-weight:500;color:var(--se-slate);padding:16px 16px;border-radius:9999px;background:transparent;border:0;transition:color .3s" style-hover="color:#0B1325">← Back to home</button>
+        </div>
+      </section>
+    </div>
+  </sc-if>
+
+  <!-- ============ NAV ============ -->
+  <header id="se-nav" style="{{ navStyle }}">
+    <div id="se-nav-glow" style="{{ navGlowStyle }}"></div>
+    <div style="{{ navShimmerStyle }}"></div>
+    <div onMouseLeave="{{ closeProjects }}" style="max-width:1320px;margin:0 auto;width:100%;display:flex;align-items:center;justify-content:space-between;gap:24px;position:relative;z-index:2">
+      <a href="#top" style="display:flex;align-items:center;gap:13px;text-decoration:none">
+        <svg width="34" height="34" viewBox="0 0 48 48" aria-hidden="true">
+          <defs><linearGradient id="se-mark" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#B8902F"/><stop offset=".5" stop-color="#D4AF37"/><stop offset="1" stop-color="#F0DCA0"/></linearGradient></defs>
+          <path d="M5.5 35 A18.5 18.5 0 0 1 42.5 35 Z" fill="url(#se-mark)"/>
+          <g stroke="#FAF8F3" stroke-width="1.5" stroke-linecap="round" opacity=".92">
+            <line x1="24" y1="35" x2="4.1" y2="24.7"/><line x1="24" y1="35" x2="9.3" y2="17.7"/><line x1="24" y1="35" x2="16.5" y2="13.3"/><line x1="24" y1="35" x2="24" y2="11.8"/><line x1="24" y1="35" x2="31.5" y2="13.3"/><line x1="24" y1="35" x2="38.7" y2="17.7"/><line x1="24" y1="35" x2="43.9" y2="24.7"/>
+          </g>
+        </svg>
+        <span style="{{ logoTextStyle }}">STABLE<span style="font-weight:300"> EVERSHINE</span></span>
+      </a>
+
+      <nav style="display:flex;align-items:center;gap:26px" class="se-desktop-nav">
+        <a href="#top" style="{{ navLink }}" style-hover="{{ navLinkHover }}">Home</a>
+        <a href="#" onClick="{{ openAboutPage }}" style="{{ navLink }}" style-hover="{{ navLinkHover }}">About</a>
+        <div onMouseEnter="{{ openProjects }}" style="position:relative">
+          <button onClick="{{ openProjectsPage }}" onMouseEnter="{{ openProjects }}" style="{{ navLink }}" style-hover="{{ navLinkHover }}">Projects <span style="font-size:9px;opacity:.7">▾</span></button>
+        </div>
+        <a href="#" onClick="{{ openLifestyle }}" style="{{ navLink }}" style-hover="{{ navLinkHover }}">Lifestyle</a>
+        <a href="#" onClick="{{ openGallery }}" style="{{ navLink }}" style-hover="{{ navLinkHover }}">Gallery</a>
+        <a href="#" onClick="{{ openBlogs }}" style="{{ navLink }}" style-hover="{{ navLinkHover }}">Blogs</a>
+        <a href="#" onClick="{{ openContact }}" style="{{ navLink }}" style-hover="{{ navLinkHover }}">Contact</a>
+        <button onClick="{{ openBook }}" style="border:0;cursor:pointer;font-family:inherit;font-size:13.5px;font-weight:600;letter-spacing:.02em;color:#0B1325;padding:12px 22px;border-radius:9999px;background:var(--se-grad);box-shadow:0 12px 30px -12px rgba(212,175,55,.6)" style-hover="filter:brightness(1.06);transform:translateY(-1px)">Book Site Visit</button>
+      </nav>
+
+      <button onClick="{{ toggleMobile }}" class="se-burger" style="display:none;border:0;background:transparent;cursor:pointer;padding:8px;flex-direction:column;gap:5px;width:40px">
+        <span style="{{ burgerLine }}"></span><span style="{{ burgerLine }}"></span><span style="{{ burgerLine }}"></span>
+      </button>
+
+      <!-- Projects mega menu -->
+      <sc-if value="{{ projectsOpen }}" hint-placeholder-val="{{ false }}">
+        <div style="position:absolute;top:calc(100% + 16px);left:50%;transform:translateX(-30%);width:520px;background:rgba(255,255,255,.92);backdrop-filter:saturate(150%) blur(16px);-webkit-backdrop-filter:saturate(150%) blur(16px);border:1px solid rgba(43,43,43,.07);border-radius:8px;box-shadow:0 40px 90px -40px rgba(11,19,37,.45);padding:14px;z-index:80;display:grid;grid-template-columns:1fr 1fr;gap:6px;animation:seMenuIn .32s cubic-bezier(.16,1,.3,1) both">
+          <sc-for list="{{ projectsItems }}" as="pi" hint-placeholder-count="4">
+            <a href="#" onClick="{{ pi.open }}" style="position:relative;display:flex;align-items:center;gap:13px;padding:13px 15px;border-radius:10px;text-decoration:none;cursor:pointer;transition:background .26s cubic-bezier(.16,1,.3,1),transform .26s" style-hover="background:#FAF7EE;transform:translateX(3px)">
+              <span style="flex:none;width:2px;align-self:stretch;border-radius:2px;background:var(--se-grad);opacity:.85"></span>
+              <span style="display:block;flex:1">
+                <span style="display:block;font-size:14.5px;font-weight:600;color:#0B1325;letter-spacing:-.01em">{{ pi.title }}</span>
+                <span style="display:block;font-size:12.5px;color:#7C8597;margin-top:3px;line-height:1.4">{{ pi.desc }}</span>
+              </span>
+              <span style="flex:none;font-size:15px;color:var(--se-accent);opacity:.5">→</span>
+            </a>
+          </sc-for>
+        </div>
+      </sc-if>
+    </div>
+  </header>
+
+  <!-- Mobile drawer -->
+  <sc-if value="{{ mobileOpen }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ closeMobile }}" style="position:fixed;inset:0;z-index:90;background:rgba(43,43,43,.5);backdrop-filter:blur(4px);animation:seOverlayIn .3s ease both">
+      <div onClick="{{ stop }}" style="position:absolute;top:0;right:0;bottom:0;width:min(86vw,360px);background:var(--se-bg);padding:28px 26px;display:flex;flex-direction:column;gap:6px;box-shadow:-30px 0 80px -40px rgba(0,0,0,.5);animation:seDrawerIn .42s cubic-bezier(.16,1,.3,1) both">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:22px">
+          <span style="font-weight:600;letter-spacing:.05em;font-size:15px">STABLE EVERSHINE</span>
+          <button onClick="{{ closeMobile }}" style="border:0;background:transparent;font-size:24px;cursor:pointer;color:#0B1325;line-height:1">×</button>
+        </div>
+        <a href="#top" onClick="{{ closeMobile }}" style="padding:15px 0;border-bottom:1px solid rgba(43,43,43,.08);text-decoration:none;color:#0B1325;font-size:17px;font-weight:500">Home</a>
+        <a href="#" onClick="{{ openAboutPageMobile }}" style="padding:15px 0;border-bottom:1px solid rgba(43,43,43,.08);text-decoration:none;color:#0B1325;font-size:17px;font-weight:500">About</a>
+        <a href="#" onClick="{{ openProjectsPage }}" style="padding:15px 0;border-bottom:1px solid rgba(43,43,43,.08);text-decoration:none;color:#0B1325;font-size:17px;font-weight:500">Projects</a>
+        <a href="#" onClick="{{ openLifestyle }}" style="padding:15px 0;border-bottom:1px solid rgba(43,43,43,.08);text-decoration:none;color:#0B1325;font-size:17px;font-weight:500">Lifestyle</a>
+        <a href="#" onClick="{{ openGallery }}" style="padding:15px 0;border-bottom:1px solid rgba(43,43,43,.08);text-decoration:none;color:#0B1325;font-size:17px;font-weight:500">Gallery</a>
+        <a href="#" onClick="{{ openBlogs }}" style="padding:15px 0;border-bottom:1px solid rgba(43,43,43,.08);text-decoration:none;color:#0B1325;font-size:17px;font-weight:500">Blogs</a>
+        <a href="#" onClick="{{ openContact }}" style="padding:15px 0;border-bottom:1px solid rgba(43,43,43,.08);text-decoration:none;color:#0B1325;font-size:17px;font-weight:500">Contact</a>
+        <button onClick="{{ openBookMobile }}" style="margin-top:20px;border:0;cursor:pointer;font-family:inherit;font-size:15px;font-weight:600;color:#0B1325;padding:15px;border-radius:9999px;background:var(--se-grad)">Book a Site Visit</button>
+      </div>
+    </div>
+  </sc-if>
+
+  <!-- ============ HERO ============ -->
+  <section id="top" data-screen-label="Hero" style="position:relative;min-height:100vh;display:flex;align-items:flex-end;overflow:hidden;background:#1c1b1a">
+    <div id="se-hero-media" style="position:absolute;inset:0;overflow:hidden">
+      <video id="se-hero-video" poster="assets/hero-tower-night.jpg" autoplay muted loop playsinline preload="auto" tabindex="-1" aria-hidden="true" style="width:100%;height:100%;object-fit:cover;transform:scale(1.04);transform-origin:50% 50%;animation:seHeroVid 7s cubic-bezier(.16,1,.3,1) forwards"><source src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260403_050628_c4e32401-fab4-4a27-b7a8-6e9291cd5959.mp4" type="video/mp4"/></video>
+      <div id="se-wm-mask" aria-hidden="true" style="position:absolute;right:9%;top:76%;width:9%;height:12%;border-radius:50%;background:radial-gradient(closest-side,rgba(22,19,17,.55),rgba(22,19,17,0) 80%);backdrop-filter:blur(9px);-webkit-backdrop-filter:blur(9px);opacity:0;transition:opacity .55s ease;pointer-events:none"></div>
+    </div>
+    <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(7,12,24,.62) 0%,rgba(7,12,24,.18) 34%,rgba(7,12,24,.30) 62%,rgba(7,12,24,.86) 100%)"></div>
+    <div data-parallax="0.14" style="position:absolute;left:-12%;bottom:-22%;width:62%;height:62%;background:radial-gradient(circle,rgba(212,175,55,.42),rgba(240,220,160,.14) 42%,transparent 66%);filter:blur(20px);pointer-events:none"></div>
+
+    <div aria-hidden="true" style="position:absolute;inset:0;z-index:2;pointer-events:none;overflow:hidden">
+      <div style="position:absolute;top:-25%;left:6%;width:20%;height:150%;background:linear-gradient(180deg,rgba(240,220,160,.18),transparent 68%);filter:blur(8px);transform:skewX(-12deg);mix-blend-mode:screen;animation:seRayDrift 14s ease-in-out infinite"></div>
+      <div style="position:absolute;top:-25%;left:30%;width:15%;height:150%;background:linear-gradient(180deg,rgba(212,175,55,.16),transparent 70%);filter:blur(10px);transform:skewX(-12deg);mix-blend-mode:screen;animation:seRayDrift 18s ease-in-out infinite reverse"></div>
+      <div style="position:absolute;top:-25%;right:12%;width:18%;height:150%;background:linear-gradient(180deg,rgba(240,220,160,.13),transparent 68%);filter:blur(9px);transform:skewX(-12deg);mix-blend-mode:screen;animation:seRayDrift 21s ease-in-out infinite"></div>
+      <div style="position:absolute;left:-12%;bottom:-32%;width:72%;height:82%;background:radial-gradient(circle,transparent,rgba(7,12,24,.5) 70%);filter:blur(22px);animation:seFog 24s ease-in-out infinite"></div>
+      <canvas id="se-particles" style="position:absolute;inset:0;width:100%;height:100%"></canvas>
+    </div>
+
+    <div id="se-hero-content" style="position:relative;z-index:3;max-width:1320px;margin:0 auto;width:100%;padding:0 clamp(24px,6vw,96px) clamp(120px,15vh,170px)">
+      <div class="reveal in" style="display:flex;align-items:center;gap:14px;margin-bottom:26px">
+        <span style="width:42px;height:2px;background:var(--se-grad)"></span>
+        <span style="font-size:12px;font-weight:600;letter-spacing:.34em;text-transform:uppercase;color:var(--se-hi)">A Stable Evershine Address</span>
+      </div>
+      <h1 class="reveal in d1" style="margin:0;max-width:16ch;color:#FAF8F3;font-weight:300;font-size:clamp(40px,6.4vw,86px);line-height:1.02;letter-spacing:-.025em;text-wrap:balance">Where every sunrise begins a <span style="font-weight:600;background:var(--se-grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent">new chapter</span>.</h1>
+      <p class="reveal in d2" style="margin:28px 0 0;max-width:54ch;color:rgba(250,248,243,.82);font-size:clamp(16px,1.5vw,19px);line-height:1.7;font-weight:300">Limited-edition residences shaped around light, craft and a calmer way of living — a brighter address built on growth, trust and prosperity.</p>
+      <div class="reveal in d3" style="display:flex;flex-wrap:wrap;gap:16px;margin-top:40px">
+        <a href="#projects" style="text-decoration:none;font-size:14.5px;font-weight:600;letter-spacing:.02em;color:#0B1325;padding:16px 30px;border-radius:9999px;background:var(--se-grad);box-shadow:0 18px 44px -18px rgba(212,175,55,.7)" style-hover="filter:brightness(1.06);transform:translateY(-2px)">Explore Residences</a>
+        <button onClick="{{ openModal }}" style="cursor:pointer;font-family:inherit;font-size:14.5px;font-weight:500;letter-spacing:.02em;color:#FAF8F3;padding:16px 30px;border-radius:9999px;background:rgba(250,248,243,.06);border:1px solid rgba(250,248,243,.4);backdrop-filter:blur(6px)" style-hover="background:rgba(250,248,243,.14);border-color:rgba(250,248,243,.7)">Enquire Now</button>
+      </div>
+    </div>
+
+    <div style="position:absolute;left:50%;bottom:26px;transform:translateX(-50%);z-index:3;display:flex;flex-direction:column;align-items:center;gap:8px;animation:seFloatY 2.6s ease-in-out infinite">
+      <span style="font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:rgba(250,248,243,.6)">Scroll</span>
+      <span style="width:1px;height:34px;background:linear-gradient(180deg,rgba(240,220,160,.9),transparent)"></span>
+    </div>
+  </section>
+
+  <!-- ============ ABOUT / STATS ============ -->
+  <section id="about" data-screen-label="About" style="max-width:1320px;margin:0 auto;padding:clamp(96px,12vw,160px) clamp(24px,6vw,96px) clamp(60px,7vw,90px)">
+    <div style="display:grid;grid-template-columns:1.05fr 1fr;gap:clamp(40px,6vw,96px);align-items:center" class="se-2col">
+      <div>
+        <div class="reveal" style="display:flex;align-items:center;gap:12px;margin-bottom:26px">
+          <span style="width:34px;height:2px;background:var(--se-grad)"></span>
+          <span style="font-size:12px;font-weight:600;letter-spacing:.28em;text-transform:uppercase;color:var(--se-accent)">The Evershine Story</span>
+        </div>
+        <h2 class="reveal d1" style="margin:0;font-weight:300;font-size:clamp(30px,4.2vw,52px);line-height:1.1;letter-spacing:-.022em;color:#0B1325">A shell emerging from water, a rising sun — and a promise of <span style="font-weight:600">brighter beginnings</span>.</h2>
+        <p class="reveal d2" style="margin:26px 0 0;font-size:17px;line-height:1.78;color:#4A5568;max-width:52ch">For nearly two decades Stable Evershine has built homes the way light builds a morning — patiently, generously, and with an eye for the moment everything turns golden. Growth, trust, prosperity and excellence aren't taglines here; they're the brief for every wall we raise.</p>
+        <div class="reveal d3" style="display:flex;flex-wrap:wrap;gap:10px;margin-top:32px">
+          <span style="{{ pillStyle }}">Growth</span><span style="{{ pillStyle }}">Trust</span><span style="{{ pillStyle }}">Prosperity</span><span style="{{ pillStyle }}">Excellence</span>
+        </div>
+      </div>
+      <div class="reveal d2" data-tilt="5" style="position:relative;transform-style:preserve-3d">
+        <div style="position:absolute;-z:1;inset:18px -18px -18px 18px;background:linear-gradient(135deg,rgba(212,175,55,.10),rgba(240,220,160,.16));border-radius:8px"></div>
+        <img class="reveal-mask" src="assets/aerial-rooftop.jpg" alt="Aerial view of the rooftop sky garden" style="position:relative;width:100%;height:clamp(360px,42vw,520px);object-fit:cover;border-radius:8px;box-shadow:0 50px 90px -50px rgba(11,19,37,.5)"/>
+      </div>
+    </div>
+
+    <div style="margin-top:clamp(64px,8vw,110px);display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(20px,3vw,40px);border-top:1px solid rgba(43,43,43,.1);padding-top:clamp(40px,5vw,64px)" class="se-stats">
+      <div class="reveal">
+        <div style="display:flex;align-items:flex-end;gap:2px"><span data-counter="18" style="font-weight:300;font-size:clamp(40px,5vw,64px);letter-spacing:-.03em;color:#0B1325;font-variant-numeric:tabular-nums">0</span><span style="font-weight:300;font-size:clamp(28px,3.4vw,40px);color:var(--se-accent);margin-bottom:6px">+</span></div>
+        <div style="font-size:13.5px;color:#9A9A9A;margin-top:8px;letter-spacing:.02em">Years of trust</div>
+      </div>
+      <div class="reveal d1">
+        <div style="display:flex;align-items:flex-end;gap:2px"><span data-counter="4.2" data-dec="1" style="font-weight:300;font-size:clamp(40px,5vw,64px);letter-spacing:-.03em;color:#0B1325;font-variant-numeric:tabular-nums">0</span><span style="font-weight:300;font-size:clamp(28px,3.4vw,40px);color:var(--se-accent);margin-bottom:6px">M</span></div>
+        <div style="font-size:13.5px;color:#9A9A9A;margin-top:8px;letter-spacing:.02em">Sq.ft delivered</div>
+      </div>
+      <div class="reveal d2">
+        <div style="display:flex;align-items:flex-end;gap:2px"><span data-counter="12000" style="font-weight:300;font-size:clamp(40px,5vw,64px);letter-spacing:-.03em;color:#0B1325;font-variant-numeric:tabular-nums">0</span><span style="font-weight:300;font-size:clamp(28px,3.4vw,40px);color:var(--se-accent);margin-bottom:6px">+</span></div>
+        <div style="font-size:13.5px;color:#9A9A9A;margin-top:8px;letter-spacing:.02em">Families served</div>
+      </div>
+      <div class="reveal d3">
+        <div style="display:flex;align-items:flex-end;gap:2px"><span data-counter="27" style="font-weight:300;font-size:clamp(40px,5vw,64px);letter-spacing:-.03em;color:#0B1325;font-variant-numeric:tabular-nums">0</span></div>
+        <div style="font-size:13.5px;color:#9A9A9A;margin-top:8px;letter-spacing:.02em">Landmarks built</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FEATURED PROJECT ============ -->
+  <section id="projects" data-screen-label="Featured Project" style="position:relative;overflow:hidden;background:#0B1325;color:#FAF8F3;padding:clamp(90px,11vw,150px) clamp(24px,6vw,96px)">
+    <div aria-hidden="true" data-parallax="0.1" style="position:absolute;top:-30%;right:-6%;width:46%;height:130%;background:radial-gradient(circle,rgba(212,175,55,.14),transparent 60%);filter:blur(24px);pointer-events:none"></div>
+    <div aria-hidden="true" style="position:absolute;top:-20%;left:12%;width:16%;height:150%;background:linear-gradient(180deg,rgba(240,220,160,.08),transparent 70%);filter:blur(12px);transform:skewX(-12deg);mix-blend-mode:screen;pointer-events:none;animation:seRayDrift 20s ease-in-out infinite"></div>
+    <div style="max-width:1320px;margin:0 auto">
+      <div class="reveal" style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:20px;margin-bottom:40px">
+        <div>
+          <div style="display:flex;align-items:center;gap:12px;margin-bottom:18px">
+            <span style="width:34px;height:2px;background:var(--se-grad)"></span>
+            <span style="font-size:12px;font-weight:600;letter-spacing:.28em;text-transform:uppercase;color:var(--se-hi)">Featured Projects</span>
+          </div>
+          <h2 style="margin:0;font-weight:300;font-size:clamp(32px,4.4vw,58px);letter-spacing:-.022em;line-height:1.04">Limited-edition addresses, <span style="font-weight:600">shaped around light</span>.</h2>
+        </div>
+        <a href="#" onClick="{{ openProjectsPage }}" style="text-decoration:none;color:rgba(250,248,243,.7);font-size:14px;font-weight:500;border-bottom:1px solid rgba(250,248,243,.3);padding-bottom:4px;cursor:pointer" style-hover="color:var(--se-hi)">View all projects →</a>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:64px" class="se-2col">
+        <sc-for list="{{ projectsList }}" as="pj" hint-placeholder-count="2">
+          <article class="reveal" data-tilt="5" style="position:relative;transform-style:preserve-3d;border-radius:12px;overflow:hidden;background:rgba(250,248,243,.04);border:1px solid rgba(250,248,243,.1);display:flex;flex-direction:column;transition:box-shadow .5s,border-color .5s" style-hover="box-shadow:0 50px 90px -45px rgba(0,0,0,.6);border-color:rgba(240,220,160,.35)">
+            <div style="position:relative;height:260px;overflow:hidden">
+              <img class="reveal-mask" src="{{ pj.img }}" loading="lazy" alt="{{ pj.name }}" style="width:100%;height:100%;object-fit:cover;transition:transform 1.2s cubic-bezier(.16,1,.3,1)" style-hover="transform:scale(1.07)"/>
+              <div aria-hidden="true" style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(7,12,24,.5));pointer-events:none"></div>
+              <span style="position:absolute;left:18px;top:18px;background:rgba(7,12,24,.55);backdrop-filter:blur(8px);border:1px solid rgba(240,220,160,.3);color:var(--se-hi);font-size:10.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;padding:8px 14px;border-radius:9999px">{{ pj.status }}</span>
+            </div>
+            <div style="padding:26px 26px 28px;display:flex;flex-direction:column;flex:1">
+              <div style="font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--se-hi);font-weight:600">{{ pj.loc }}</div>
+              <h3 style="margin:9px 0 0;font-size:24px;font-weight:500;letter-spacing:-.01em;color:#FAF8F3">{{ pj.name }} <span style="font-weight:300;color:rgba(250,248,243,.5);font-size:15px">{{ pj.sub }}</span></h3>
+              <p style="margin:13px 0 0;font-size:14.5px;line-height:1.65;color:rgba(250,248,243,.74);flex:1">{{ pj.desc }}</p>
+              <div style="display:flex;align-items:center;gap:20px;margin:20px 0 0;flex-wrap:wrap">
+                <span style="font-size:13px;color:rgba(250,248,243,.6)">Config <span style="color:var(--se-hi);font-weight:600">{{ pj.config }}</span></span>
+                <span style="font-size:13px;color:rgba(250,248,243,.6)">From <span style="color:var(--se-hi);font-weight:600">{{ pj.price }}</span></span>
+              </div>
+              <button onClick="{{ pj.open }}" style="margin-top:22px;align-self:flex-start;cursor:pointer;font-family:inherit;font-size:13.5px;font-weight:600;color:#0B1325;padding:13px 26px;border:0;border-radius:9999px;background:var(--se-grad);box-shadow:0 14px 32px -16px rgba(212,175,55,.7);transition:filter .3s,box-shadow .3s" style-hover="filter:brightness(1.06);box-shadow:0 18px 40px -14px rgba(212,175,55,.95)">View project →</button>
+            </div>
+          </article>
+        </sc-for>
+      </div>
+
+      <div class="reveal" style="display:flex;align-items:center;gap:14px;margin-bottom:30px">
+        <span style="font-size:12px;font-weight:600;letter-spacing:.28em;text-transform:uppercase;color:var(--se-hi)">Kinara — in focus</span>
+        <span style="flex:1;height:1px;background:linear-gradient(90deg,rgba(240,220,160,.4),transparent)"></span>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1.25fr 1fr;gap:clamp(32px,4vw,64px);align-items:stretch" class="se-2col">
+        <div class="reveal" data-tilt="5" style="position:relative;transform-style:preserve-3d">
+          <img class="reveal-mask" src="assets/tower-day.jpg" alt="Kinara tower, daytime render" style="width:100%;height:100%;min-height:440px;object-fit:cover;border-radius:8px"/>
+          <div style="position:absolute;left:22px;bottom:22px;display:flex;gap:10px">
+            <span style="background:rgba(7,12,24,.55);backdrop-filter:blur(8px);border:1px solid rgba(240,220,160,.3);color:var(--se-hi);font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;padding:9px 15px;border-radius:9999px">RERA Registered</span>
+            <span style="background:rgba(7,12,24,.55);backdrop-filter:blur(8px);border:1px solid rgba(250,248,243,.18);color:#FAF8F3;font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;padding:9px 15px;border-radius:9999px">Now Selling</span>
+          </div>
+        </div>
+
+        <div class="reveal d1" style="display:flex;flex-direction:column">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(250,248,243,.1);border:1px solid rgba(250,248,243,.1);border-radius:8px;overflow:hidden">
+            <div style="background:#0B1325;padding:22px 24px"><div style="font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#9A9A9A">Configuration</div><div style="font-size:20px;font-weight:500;margin-top:7px">2, 3 & 4 BHK</div></div>
+            <div style="background:#0B1325;padding:22px 24px"><div style="font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#9A9A9A">Starting</div><div style="font-size:20px;font-weight:500;margin-top:7px">₹2.4 Cr<span style="font-size:13px;color:#9A9A9A;font-weight:400"> onwards</span></div></div>
+            <div style="background:#0B1325;padding:22px 24px"><div style="font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#9A9A9A">Carpet Area</div><div style="font-size:20px;font-weight:500;margin-top:7px">780 – 1,640 ft²</div></div>
+            <div style="background:#0B1325;padding:22px 24px"><div style="font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#9A9A9A">Possession</div><div style="font-size:20px;font-weight:500;margin-top:7px">Dec 2027</div></div>
+          </div>
+
+          <div role="tablist" style="display:flex;gap:6px;margin-top:26px;flex-wrap:wrap">
+            <sc-for list="{{ projectTabs }}" as="t" hint-placeholder-count="4">
+              <button onClick="{{ t.onClick }}" style="{{ t.style }}">{{ t.label }}</button>
+            </sc-for>
+          </div>
+          <div style="margin-top:20px;flex:1">
+            <p style="margin:0;font-size:15.5px;line-height:1.74;color:rgba(250,248,243,.78)">{{ projectPanel.body }}</p>
+            <ul style="margin:18px 0 0;display:grid;gap:11px">
+              <sc-for list="{{ projectPanel.list }}" as="li" hint-placeholder-count="4">
+                <li style="display:flex;gap:12px;align-items:flex-start;font-size:14.5px;color:rgba(250,248,243,.74);line-height:1.5"><span style="flex:none;width:6px;height:6px;border-radius:9999px;background:var(--se-grad);margin-top:7px"></span>{{ li }}</li>
+              </sc-for>
+            </ul>
+          </div>
+
+          <div style="display:flex;flex-wrap:wrap;gap:13px;margin-top:30px">
+            <button onClick="{{ openKinara }}" style="cursor:pointer;font-family:inherit;font-size:14px;font-weight:600;color:#0B1325;padding:14px 26px;border:0;border-radius:9999px;background:var(--se-grad)" style-hover="filter:brightness(1.06);transform:translateY(-1px)">View Project</button>
+            <button onClick="{{ openModal }}" style="cursor:pointer;font-family:inherit;font-size:14px;font-weight:500;color:#FAF8F3;padding:14px 26px;border:1px solid rgba(250,248,243,.32);border-radius:9999px;background:transparent" style-hover="border-color:var(--se-hi);color:var(--se-hi)">Download Brochure</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ WHY STABLE EVERSHINE ============ -->
+  <section id="why" data-screen-label="Why Stable Evershine" style="max-width:1320px;margin:0 auto;padding:clamp(90px,11vw,150px) clamp(24px,6vw,96px)">
+    <div class="reveal" style="max-width:680px;margin-bottom:60px">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:20px">
+        <span style="width:34px;height:2px;background:var(--se-grad)"></span>
+        <span style="font-size:12px;font-weight:600;letter-spacing:.28em;text-transform:uppercase;color:var(--se-accent)">Why Stable Evershine</span>
+      </div>
+      <h2 style="margin:0;font-weight:300;font-size:clamp(30px,4.2vw,52px);letter-spacing:-.022em;line-height:1.1;color:#0B1325">Six reasons families build their lives <span style="font-weight:600">with us</span>.</h2>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(20px,2.5vw,32px)" class="se-why">
+      <sc-for list="{{ whyPoints }}" as="w" hint-placeholder-count="6">
+        <div class="reveal" style="padding:30px 28px;border-radius:12px;background:#fff;border:1px solid rgba(11,19,37,.06);box-shadow:0 30px 60px -55px rgba(11,19,37,.5);transition:transform .5s cubic-bezier(.16,1,.3,1),box-shadow .5s" style-hover="transform:translateY(-4px);box-shadow:0 44px 80px -50px rgba(11,19,37,.5)">
+          <div style="font-size:13px;font-weight:700;letter-spacing:.1em;color:transparent;background:var(--se-grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent">{{ w.n }}</div>
+          <h3 style="margin:16px 0 0;font-size:20px;font-weight:600;letter-spacing:-.01em;color:#0B1325">{{ w.h }}</h3>
+          <p style="margin:12px 0 0;font-size:14.5px;line-height:1.7;color:var(--se-slate)">{{ w.p }}</p>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <!-- ============ LIFESTYLE ============ -->
+  <section id="lifestyle" data-screen-label="Lifestyle" style="position:relative;overflow:hidden;background:var(--se-bg-alt);padding:clamp(90px,11vw,150px) clamp(24px,6vw,96px)">
+    <div style="max-width:1320px;margin:0 auto;display:grid;grid-template-columns:1fr 1.05fr;gap:clamp(40px,6vw,90px);align-items:center" class="se-2col">
+      <div>
+        <div class="reveal" style="display:flex;align-items:center;gap:12px;margin-bottom:24px">
+          <span style="width:34px;height:2px;background:var(--se-grad)"></span>
+          <span style="font-size:12px;font-weight:600;letter-spacing:.28em;text-transform:uppercase;color:var(--se-accent)">Lifestyle</span>
+        </div>
+        <h2 class="reveal d1" style="margin:0;font-weight:300;font-size:clamp(30px,4.2vw,50px);letter-spacing:-.022em;line-height:1.1;color:#0B1325">A calmer way of living, <span style="font-weight:600">by design</span>.</h2>
+        <p class="reveal d2" style="margin:24px 0 0;font-size:16.5px;line-height:1.78;color:#4A5568;max-width:50ch">From sky gardens that catch the morning to a concierge that quietly handles the rest — every day at an Evershine address is shaped to give you more of it back.</p>
+        <div class="reveal d3" style="display:flex;flex-wrap:wrap;gap:10px;margin-top:30px">
+          <sc-for list="{{ lifestyleTags }}" as="lt" hint-placeholder-count="6"><span style="{{ pillStyle }}">{{ lt }}</span></sc-for>
+        </div>
+        <button onClick="{{ openLifestyle }}" class="reveal d4" style="margin-top:32px;cursor:pointer;font-family:inherit;font-size:14px;font-weight:600;color:#0B1325;padding:14px 28px;border:0;border-radius:9999px;background:var(--se-grad);box-shadow:0 16px 38px -18px rgba(212,175,55,.7);transition:filter .3s,box-shadow .3s" style-hover="filter:brightness(1.06);box-shadow:0 20px 44px -16px rgba(212,175,55,.9)">Explore the lifestyle →</button>
+      </div>
+      <div class="reveal d2" data-tilt="5" style="position:relative;transform-style:preserve-3d">
+        <div style="position:absolute;inset:-16px 16px 16px -16px;background:linear-gradient(135deg,rgba(212,175,55,.1),rgba(240,220,160,.16));border-radius:10px"></div>
+        <img class="reveal-mask" src="assets/recreation.jpg" loading="lazy" alt="Lifestyle at an Evershine address" style="position:relative;width:100%;height:clamp(340px,40vw,500px);object-fit:cover;border-radius:10px;box-shadow:0 50px 90px -50px rgba(11,19,37,.5);transition:transform 1.2s cubic-bezier(.16,1,.3,1)" style-hover="transform:scale(1.04)"/>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ AMENITIES ============ -->
+  <section id="amenities" data-screen-label="Amenities" style="max-width:1320px;margin:0 auto;padding:clamp(90px,11vw,150px) clamp(24px,6vw,96px)">
+    <div class="reveal" style="text-align:center;max-width:680px;margin:0 auto 60px">
+      <div style="display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:20px">
+        <span style="width:34px;height:2px;background:var(--se-grad)"></span>
+        <span style="font-size:12px;font-weight:600;letter-spacing:.28em;text-transform:uppercase;color:var(--se-accent)">A Life Well Held</span>
+        <span style="width:34px;height:2px;background:var(--se-grad)"></span>
+      </div>
+      <h2 style="margin:0;font-weight:300;font-size:clamp(30px,4.2vw,54px);letter-spacing:-.022em;line-height:1.08">Amenities designed to give your <span style="font-weight:600">time back</span>.</h2>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(6,1fr);grid-auto-rows:230px;gap:14px" class="se-amen">
+      <figure class="reveal" style="margin:0;position:relative;overflow:hidden;border-radius:8px;grid-column:span 4;grid-row:span 2">
+        <img src="assets/lobby.jpg" alt="Triple-height arrival lobby" style="width:100%;height:100%;object-fit:cover;transition:transform 1.1s cubic-bezier(.16,1,.3,1)" style-hover="transform:scale(1.06)"/>
+        <figcaption style="{{ amenCap }}"><span style="font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--se-hi);font-weight:600">Arrival</span><span style="display:block;font-size:23px;font-weight:500;margin-top:6px">The Grand Lobby</span><span style="display:block;font-size:13.5px;color:rgba(250,248,243,.72);margin-top:6px;max-width:42ch">A triple-height welcome in marble and warm brass — your first breath of calm.</span></figcaption>
+      </figure>
+      <figure class="reveal d1" style="margin:0;position:relative;overflow:hidden;border-radius:8px;grid-column:span 2">
+        <img src="assets/gym.jpg" alt="Fitness studio" style="width:100%;height:100%;object-fit:cover;transition:transform 1.1s cubic-bezier(.16,1,.3,1)" style-hover="transform:scale(1.06)"/>
+        <figcaption style="{{ amenCapSm }}"><span style="font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--se-hi);font-weight:600">Wellness</span><span style="display:block;font-size:18px;font-weight:500;margin-top:4px">Fitness Studio</span></figcaption>
+      </figure>
+      <figure class="reveal d2" style="margin:0;position:relative;overflow:hidden;border-radius:8px;grid-column:span 2">
+        <img src="assets/recreation.jpg" alt="Indoor games lounge" style="width:100%;height:100%;object-fit:cover;transition:transform 1.1s cubic-bezier(.16,1,.3,1)" style-hover="transform:scale(1.06)"/>
+        <figcaption style="{{ amenCapSm }}"><span style="font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--se-hi);font-weight:600">Play</span><span style="display:block;font-size:18px;font-weight:500;margin-top:4px">Games Lounge</span></figcaption>
+      </figure>
+      <figure class="reveal" style="margin:0;position:relative;overflow:hidden;border-radius:8px;grid-column:span 2">
+        <img src="assets/banquet.jpg" alt="Private banquet lounge" style="width:100%;height:100%;object-fit:cover;transition:transform 1.1s cubic-bezier(.16,1,.3,1)" style-hover="transform:scale(1.06)"/>
+        <figcaption style="{{ amenCapSm }}"><span style="font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--se-hi);font-weight:600">Gather</span><span style="display:block;font-size:18px;font-weight:500;margin-top:4px">Banquet Lounge</span></figcaption>
+      </figure>
+      <figure class="reveal d1" style="margin:0;position:relative;overflow:hidden;border-radius:8px;grid-column:span 4">
+        <img src="assets/dining.jpg" alt="Private dining hall" style="width:100%;height:100%;object-fit:cover;transition:transform 1.1s cubic-bezier(.16,1,.3,1)" style-hover="transform:scale(1.06)"/>
+        <figcaption style="{{ amenCap }}"><span style="font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--se-hi);font-weight:600">Celebrate</span><span style="display:block;font-size:23px;font-weight:500;margin-top:6px">Private Dining Hall</span><span style="display:block;font-size:13.5px;color:rgba(250,248,243,.72);margin-top:6px;max-width:42ch">Crystal-lit and column-grand — for the dinners you'll remember for years.</span></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ============ LOCATION ============ -->
+  <section id="location" data-screen-label="Location" style="background:var(--se-bg-alt);padding:clamp(90px,11vw,150px) clamp(24px,6vw,96px)">
+    <div style="max-width:1320px;margin:0 auto;display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(40px,5vw,80px);align-items:center" class="se-2col">
+      <div class="reveal" style="position:relative;border-radius:8px;overflow:hidden;height:clamp(380px,44vw,520px);background:repeating-linear-gradient(45deg,#e7ddca,#e7ddca 14px,#ece3d2 14px,#ece3d2 28px);border:1px solid rgba(43,43,43,.08)">
+        <div style="position:absolute;inset:0;background:radial-gradient(circle at 60% 42%,rgba(212,175,55,.10),transparent 55%)"></div>
+        <div style="position:absolute;left:58%;top:40%;width:18px;height:18px;border-radius:9999px;background:var(--se-strong);box-shadow:0 0 0 8px rgba(212,175,55,.22),0 0 0 16px rgba(212,175,55,.10)"></div>
+        <div style="position:absolute;left:32%;top:62%;width:11px;height:11px;border-radius:9999px;background:#0B1325;opacity:.5"></div>
+        <div style="position:absolute;left:73%;top:66%;width:11px;height:11px;border-radius:9999px;background:#0B1325;opacity:.5"></div>
+        <div style="position:absolute;left:46%;top:24%;width:11px;height:11px;border-radius:9999px;background:#0B1325;opacity:.5"></div>
+        <div style="position:absolute;left:20px;bottom:20px;font-family:ui-monospace,Menlo,monospace;font-size:11px;letter-spacing:.04em;color:#8a7c5f;background:rgba(250,248,243,.7);padding:8px 12px;border-radius:5px;border:1px dashed rgba(138,124,95,.5)">[ interactive map embed → location ]</div>
+      </div>
+      <div>
+        <div class="reveal" style="display:flex;align-items:center;gap:12px;margin-bottom:24px">
+          <span style="width:34px;height:2px;background:var(--se-grad)"></span>
+          <span style="font-size:12px;font-weight:600;letter-spacing:.28em;text-transform:uppercase;color:var(--se-accent)">Location Advantage</span>
+        </div>
+        <h2 class="reveal d1" style="margin:0 0 10px;font-weight:300;font-size:clamp(28px,3.6vw,46px);letter-spacing:-.022em;line-height:1.1">Minutes from everything that <span style="font-weight:600">matters</span>.</h2>
+        <p class="reveal d2" style="margin:0 0 30px;font-size:15.5px;line-height:1.7;color:#4A5568;max-width:46ch">A connected address where the city comes to you — business, schools and the coastline, all within an easy drive.</p>
+        <ul class="reveal d3" style="display:grid;gap:2px">
+          <sc-for list="{{ connectivity }}" as="c" hint-placeholder-count="6">
+            <li style="display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px 4px;border-bottom:1px solid rgba(43,43,43,.1)">
+              <span style="display:flex;align-items:center;gap:14px"><span style="font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--se-accent);font-weight:600;width:78px">{{ c.tag }}</span><span style="font-size:15.5px;color:#0B1325;font-weight:500">{{ c.name }}</span></span>
+              <span style="font-size:14px;color:#9A9A9A;font-variant-numeric:tabular-nums;white-space:nowrap">{{ c.time }}</span>
+            </li>
+          </sc-for>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TESTIMONIALS ============ -->
+  <section id="testimonials" data-screen-label="Testimonials" style="max-width:1320px;margin:0 auto;padding:clamp(90px,11vw,150px) clamp(24px,6vw,96px)">
+    <div class="reveal" style="text-align:center;max-width:680px;margin:0 auto 56px">
+      <div style="display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:20px">
+        <span style="width:34px;height:2px;background:var(--se-grad)"></span>
+        <span style="font-size:12px;font-weight:600;letter-spacing:.28em;text-transform:uppercase;color:var(--se-accent)">In Their Words</span>
+        <span style="width:34px;height:2px;background:var(--se-grad)"></span>
+      </div>
+      <h2 style="margin:0;font-weight:300;font-size:clamp(30px,4.2vw,52px);letter-spacing:-.022em;line-height:1.08;color:#0B1325">Trusted by the families who <span style="font-weight:600">live here</span>.</h2>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px" class="se-test">
+      <sc-for list="{{ testimonials }}" as="ts" hint-placeholder-count="3">
+        <figure class="reveal" style="margin:0;display:flex;flex-direction:column;padding:34px 30px;border-radius:14px;background:#fff;border:1px solid rgba(11,19,37,.06);box-shadow:0 34px 70px -55px rgba(11,19,37,.5)">
+          <div style="font-size:46px;line-height:.6;color:transparent;background:var(--se-grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;font-family:Georgia,serif">“</div>
+          <blockquote style="margin:18px 0 0;font-size:16px;line-height:1.7;color:#0B1325;font-weight:400;flex:1">{{ ts.q }}</blockquote>
+          <figcaption style="margin-top:24px;display:flex;align-items:center;gap:14px">
+            <span style="flex:none;width:44px;height:44px;border-radius:9999px;background:linear-gradient(135deg,rgba(212,175,55,.18),rgba(240,220,160,.3));display:flex;align-items:center;justify-content:center;color:var(--se-accent);font-weight:700;font-size:15px">{{ ts.in }}</span>
+            <span><span style="display:block;font-size:14.5px;font-weight:600;color:#0B1325">{{ ts.n }}</span><span style="display:block;font-size:12.5px;color:#9A9A9A;margin-top:2px">{{ ts.d }}</span></span>
+          </figcaption>
+        </figure>
+      </sc-for>
+    </div>
+  </section>
+
+  <!-- ============ NEWSROOM ============ -->
+  <section id="newsroom" data-screen-label="Latest Updates" style="max-width:1320px;margin:0 auto;padding:clamp(90px,11vw,150px) clamp(24px,6vw,96px)">
+    <div class="reveal" style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:24px;margin-bottom:46px">
+      <div>
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:18px">
+          <span style="width:34px;height:2px;background:var(--se-grad)"></span>
+          <span style="font-size:12px;font-weight:600;letter-spacing:.28em;text-transform:uppercase;color:var(--se-accent)">Latest Updates</span>
+        </div>
+        <h2 style="margin:0;font-weight:300;font-size:clamp(30px,4vw,52px);letter-spacing:-.022em;line-height:1.06">Stories from the <span style="font-weight:600">sunrise side</span>.</h2>
+      </div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <sc-for list="{{ newsFilters }}" as="f" hint-placeholder-count="5">
+          <button onClick="{{ f.onClick }}" style="{{ f.style }}">{{ f.label }}</button>
+        </sc-for>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px" class="se-news">
+      <sc-for list="{{ filteredNews }}" as="a" hint-placeholder-count="0">
+        <article class="reveal" data-tilt="6" style="border:1px solid rgba(43,43,43,.08);border-radius:8px;overflow:hidden;background:#fff;transition:transform .5s cubic-bezier(.16,1,.3,1),box-shadow .5s" style-hover="box-shadow:0 40px 70px -45px rgba(11,19,37,.5)">
+          <div style="position:relative;height:200px;overflow:hidden">
+            <img data-src="{{ a.img }}" alt="{{ a.title }}" style="width:100%;height:100%;object-fit:cover;background:#EEF2F8"/>
+            <span style="position:absolute;left:14px;top:14px;background:rgba(7,12,24,.62);backdrop-filter:blur(6px);color:var(--se-hi);font-size:10.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;padding:7px 13px;border-radius:9999px">{{ a.cat }}</span>
+          </div>
+          <div style="padding:24px 22px 26px">
+            <div style="font-size:12px;color:#9A9A9A;letter-spacing:.02em">{{ a.date }} · {{ a.read }}</div>
+            <h3 style="margin:12px 0 0;font-size:19px;font-weight:500;line-height:1.32;letter-spacing:-.01em;color:#0B1325;text-wrap:pretty">{{ a.title }}</h3>
+            <a href="#newsroom" style="display:inline-flex;align-items:center;gap:8px;margin-top:18px;font-size:13.5px;font-weight:600;color:var(--se-accent);text-decoration:none" style-hover="gap:13px">Read story →</a>
+          </div>
+        </article>
+      </sc-for>
+    </div>
+  </section>
+
+  <!-- ============ ENQUIRE BAND ============ -->
+  <section id="enquire" data-screen-label="Enquire" style="position:relative;overflow:hidden;background:#0B1325;color:#FAF8F3;padding:clamp(80px,10vw,130px) clamp(24px,6vw,96px)">
+    <div data-parallax="0.1" style="position:absolute;right:-10%;top:-30%;width:55%;height:120%;background:radial-gradient(circle,rgba(212,175,55,.32),rgba(240,220,160,.10) 42%,transparent 66%);filter:blur(10px);pointer-events:none"></div>
+    <div style="position:relative;max-width:1320px;margin:0 auto;display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(40px,5vw,80px);align-items:center" class="se-2col">
+      <div class="reveal">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:22px">
+          <span style="width:34px;height:2px;background:var(--se-grad)"></span>
+          <span style="font-size:12px;font-weight:600;letter-spacing:.28em;text-transform:uppercase;color:var(--se-hi)">Begin the Conversation</span>
+        </div>
+        <h2 style="margin:0;font-weight:300;font-size:clamp(30px,4.4vw,56px);letter-spacing:-.022em;line-height:1.06">Let's find your <span style="font-weight:600;background:var(--se-grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent">brighter address</span>.</h2>
+        <p style="margin:24px 0 0;font-size:16px;line-height:1.7;color:rgba(250,248,243,.78);max-width:48ch">Share a few details and a Stable Evershine relationship manager will reach out with availability, pricing and a private viewing.</p>
+      </div>
+      <div class="reveal d1" style="display:flex;flex-direction:column;gap:14px;align-items:flex-start">
+        <button onClick="{{ openBook }}" style="cursor:pointer;font-family:inherit;width:100%;font-size:16px;font-weight:600;color:#0B1325;padding:18px;border:0;border-radius:10px;background:var(--se-grad);box-shadow:0 24px 50px -22px rgba(212,175,55,.65)" style-hover="filter:brightness(1.06);transform:translateY(-2px)">Book a Site Visit</button>
+        <a href="https://wa.me/910000000000" target="_blank" rel="noopener" style="text-decoration:none;width:100%;box-sizing:border-box;display:flex;align-items:center;justify-content:center;gap:11px;font-size:15px;font-weight:600;color:#FAF8F3;padding:17px;border:1px solid rgba(250,248,243,.28);border-radius:10px" style-hover="border-color:#25D366;color:#25D366">
+          <span style="width:9px;height:9px;border-radius:9999px;background:#25D366"></span>Chat on WhatsApp
+        </a>
+        <div style="font-size:13px;color:rgba(250,248,243,.55);margin-top:4px">Or call <span style="color:var(--se-hi)">+91 00000 00000</span> · Mon–Sun, 9am–8pm</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer id="careers" style="background:#070C18;color:rgba(250,248,243,.7);padding:clamp(64px,8vw,96px) clamp(24px,6vw,96px) 40px">
+    <div style="max-width:1320px;margin:0 auto">
+      <div style="display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:40px" class="se-foot">
+        <div>
+          <div style="display:flex;align-items:center;gap:12px">
+            <svg width="30" height="30" viewBox="0 0 48 48" aria-hidden="true"><path d="M5.5 35 A18.5 18.5 0 0 1 42.5 35 Z" fill="url(#se-mark)"/><g stroke="#070C18" stroke-width="1.5" stroke-linecap="round" opacity=".9"><line x1="24" y1="35" x2="9.3" y2="17.7"/><line x1="24" y1="35" x2="16.5" y2="13.3"/><line x1="24" y1="35" x2="24" y2="11.8"/><line x1="24" y1="35" x2="31.5" y2="13.3"/><line x1="24" y1="35" x2="38.7" y2="17.7"/></g></svg>
+            <span style="font-size:16px;font-weight:600;letter-spacing:.05em;color:#FAF8F3">STABLE EVERSHINE</span>
+          </div>
+          <p style="margin:20px 0 0;font-size:14px;line-height:1.7;max-width:34ch">Building brighter beginnings — homes shaped around light, craft and the people who live in them.</p>
+          <div style="display:flex;gap:10px;margin-top:24px">
+            <span style="{{ socialDot }}">in</span><span style="{{ socialDot }}">ig</span><span style="{{ socialDot }}">fb</span><span style="{{ socialDot }}">yt</span>
+          </div>
+        </div>
+        <div>
+          <div style="{{ footHead }}">Explore</div>
+          <ul style="display:grid;gap:13px">
+            <li><a href="#" onClick="{{ openProjectsPage }}" style="{{ footLink }}" style-hover="color:var(--se-hi)">Projects</a></li>
+            <li><a href="#" onClick="{{ openLifestyle }}" style="{{ footLink }}" style-hover="color:var(--se-hi)">Lifestyle</a></li>
+            <li><a href="#" onClick="{{ openGallery }}" style="{{ footLink }}" style-hover="color:var(--se-hi)">Gallery</a></li>
+            <li><a href="#" onClick="{{ openBlogs }}" style="{{ footLink }}" style-hover="color:var(--se-hi)">Blogs</a></li>
+          </ul>
+        </div>
+        <div>
+          <div style="{{ footHead }}">Company</div>
+          <ul style="display:grid;gap:13px">
+            <li><a href="#" onClick="{{ openAboutPage }}" style="{{ footLink }}" style-hover="color:var(--se-hi)">About Us</a></li>
+            <li><a href="#" onClick="{{ openCsr }}" style="{{ footLink }}" style-hover="color:var(--se-hi)">CSR & Sustainability</a></li>
+            <li><a href="#" onClick="{{ openCareers }}" style="{{ footLink }}" style-hover="color:var(--se-hi)">Careers</a></li>
+            <li><a href="#" onClick="{{ openContact }}" style="{{ footLink }}" style-hover="color:var(--se-hi)">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <div style="{{ footHead }}">Visit</div>
+          <p style="margin:0;font-size:14px;line-height:1.7">Experience Centre<br/>Evershine Avenue<br/>Mumbai 400 000</p>
+          <p style="margin:16px 0 0;font-size:14px;line-height:1.7">+91 00000 00000<br/>hello@stableevershine.com</p>
+        </div>
+      </div>
+      <div style="height:1px;background:linear-gradient(90deg,transparent,rgba(212,175,55,.5),rgba(240,220,160,.5),transparent);margin:44px 0 24px"></div>
+      <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px;font-size:12.5px;color:rgba(250,248,243,.45)">
+        <span>© 2026 Stable Evershine. All rights reserved.</span>
+        <div style="display:flex;gap:20px;flex-wrap:wrap">
+          <a href="#" onClick="{{ openPrivacy }}" style="{{ footLink }}" style-hover="color:var(--se-hi)">Privacy Policy</a>
+          <a href="#" onClick="{{ openTerms }}" style="{{ footLink }}" style-hover="color:var(--se-hi)">Terms &amp; Conditions</a>
+          <a href="#" onClick="{{ openRera }}" style="{{ footLink }}" style-hover="color:var(--se-hi)">RERA</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============ ENQUIRE MODAL ============ -->
+  <sc-if value="{{ modalOpen }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ closeModal }}" style="position:fixed;inset:0;z-index:100;background:rgba(7,12,24,.62);backdrop-filter:blur(7px);display:flex;align-items:center;justify-content:center;padding:20px;overflow-y:auto">
+      <div onClick="{{ stop }}" style="position:relative;width:min(560px,100%);background:var(--se-bg);border-radius:12px;box-shadow:0 60px 120px -40px rgba(0,0,0,.6);overflow:hidden;margin:auto">
+        <div style="height:5px;background:var(--se-grad)"></div>
+        <button onClick="{{ closeModal }}" style="position:absolute;top:16px;right:16px;border:0;background:rgba(43,43,43,.06);width:36px;height:36px;border-radius:9999px;cursor:pointer;font-size:20px;color:#0B1325;line-height:1" style-hover="background:rgba(43,43,43,.12)">×</button>
+
+        <sc-if value="{{ sent }}" hint-placeholder-val="{{ false }}">
+          <div style="padding:64px 44px;text-align:center">
+            <div style="width:72px;height:72px;margin:0 auto;border-radius:9999px;background:var(--se-grad);display:flex;align-items:center;justify-content:center"><span style="color:#fff;font-size:34px;line-height:1">✓</span></div>
+            <h3 style="margin:26px 0 0;font-size:26px;font-weight:500;letter-spacing:-.01em">Thank you.</h3>
+            <p style="margin:14px 0 0;font-size:15.5px;color:#4A5568;line-height:1.6;max-width:36ch;margin-left:auto;margin-right:auto">Your enquiry is in. A relationship manager will be in touch within one business day.</p>
+            <button onClick="{{ closeModal }}" style="margin-top:30px;cursor:pointer;font-family:inherit;font-size:14px;font-weight:600;color:#0B1325;padding:14px 30px;border:0;border-radius:9999px;background:var(--se-grad)">Done</button>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ notSent }}" hint-placeholder-val="{{ true }}">
+        <form onSubmit="{{ submitForm }}" style="padding:34px clamp(24px,5vw,44px) 40px">
+          <div style="font-size:11px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--se-accent)">Enquire Now</div>
+          <h3 style="margin:10px 0 4px;font-size:25px;font-weight:500;letter-spacing:-.015em">Request a private viewing</h3>
+          <p style="margin:0 0 24px;font-size:14px;color:#9A9A9A">We typically respond within one business day.</p>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+            <label style="{{ fieldLabelWide }}">Full name<input required name="name" placeholder="Your name" style="{{ inputStyle }}"/></label>
+            <label style="{{ fieldLabel }}">Phone<input required name="phone" type="tel" placeholder="+91" style="{{ inputStyle }}"/></label>
+            <label style="{{ fieldLabel }}">Email<input required name="email" type="email" placeholder="you@email.com" style="{{ inputStyle }}"/></label>
+            <label style="{{ fieldLabel }}">City<input name="city" placeholder="City" style="{{ inputStyle }}"/></label>
+            <label style="{{ fieldLabel }}">Interested in<select name="project" style="{{ inputStyle }}"><option>Kinara — Residences</option><option>Future launches</option><option>Not sure yet</option></select></label>
+            <label style="{{ fieldLabelWide }}">Message <span style="color:#bbb;font-weight:400;text-transform:none;letter-spacing:0">(optional)</span><textarea name="msg" rows="3" placeholder="Tell us what you're looking for…" style="{{ textareaStyle }}"></textarea></label>
+          </div>
+          <button type="submit" style="margin-top:22px;width:100%;cursor:pointer;font-family:inherit;font-size:15px;font-weight:600;color:#0B1325;padding:16px;border:0;border-radius:9999px;background:var(--se-grad);box-shadow:0 18px 40px -20px rgba(212,175,55,.6)" style-hover="filter:brightness(1.06)">Submit enquiry</button>
+          <a href="https://wa.me/910000000000" target="_blank" rel="noopener" style="margin-top:12px;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:10px;font-size:14px;font-weight:600;color:#0B1325;padding:15px;border:1px solid rgba(43,43,43,.18);border-radius:9999px" style-hover="border-color:#25D366;color:#1ba34f">
+            <span style="width:9px;height:9px;border-radius:9999px;background:#25D366"></span>Continue on WhatsApp
+          </a>
+        </form>
+        </sc-if>
+      </div>
+    </div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:960},&quot;intro&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Onyx Minimal&quot;,&quot;Champagne Bloom&quot;,&quot;Light Sweep&quot;],&quot;default&quot;:&quot;Light Sweep&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;palette&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Champagne&quot;,&quot;Sunrise&quot;,&quot;Bronze&quot;],&quot;default&quot;:&quot;Champagne&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;temperature&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Alabaster&quot;,&quot;Warm Ivory&quot;,&quot;Cool Stone&quot;],&quot;default&quot;:&quot;Warm Ivory&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;motion&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Cinematic&quot;,&quot;Subtle&quot;,&quot;Off&quot;],&quot;default&quot;:&quot;Cinematic&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+const ENABLE_SCROLL_EFFECTS = true; // master switch — set false to revert to the original hero/site (no premium nav FX, no extra parallax)
+
+const SE_PALETTES = {
+  Sunrise:   { grad:'linear-gradient(90deg,#F58200 0%,#FBB31A 50%,#FFE066 100%)', accent:'#B07A1E', hi:'#FFE066', strong:'#F58200' },
+  Champagne: { grad:'linear-gradient(90deg,#B8902F 0%,#D4AF37 50%,#F0DCA0 100%)', accent:'#8A6D2E', hi:'#F0DCA0', strong:'#D4AF37' },
+  Bronze:    { grad:'linear-gradient(90deg,#9C5526 0%,#C77C3B 50%,#E5AC6B 100%)', accent:'#7C4A23', hi:'#E6BC8A', strong:'#B86A30' }
+};
+const SE_TEMP = {
+  'Alabaster':   { bg:'#F7F9FC', alt:'#EEF2F8' },
+  'Warm Ivory':  { bg:'#FAF8F3', alt:'#F3EEE4' },
+  'Cool Stone':  { bg:'#F3F4F4', alt:'#E7EBEA' }
+};
+const SE_MOTION = {
+  Cinematic: { rise:'34px', dur:'1.1s' },
+  Subtle:    { rise:'15px', dur:'.65s' },
+  Off:       { rise:'0px',  dur:'.001s' }
+};
+
+class Component extends DCLogic {
+  state = { scrolled:false, aboutOpen:false, mobileOpen:false, modalOpen:false, sent:false, tab:'Overview', filter:'All', loading:true, leaving:false, scrollPct:'0%', activeSection:'top', pageKey:null, pageLeaving:false };
+
+  applyTheme(){
+    const root = document.documentElement.style;
+    const p = SE_PALETTES[this.props.palette] || SE_PALETTES.Champagne;
+    const t = SE_TEMP[this.props.temperature] || SE_TEMP['Alabaster'];
+    const m = SE_MOTION[this.props.motion] || SE_MOTION.Cinematic;
+    root.setProperty('--se-grad', p.grad);
+    root.setProperty('--se-accent', p.accent);
+    root.setProperty('--se-hi', p.hi);
+    root.setProperty('--se-strong', p.strong);
+    root.setProperty('--se-bg', t.bg);
+    root.setProperty('--se-bg-alt', t.alt);
+    root.setProperty('--se-rise', m.rise);
+    root.setProperty('--se-dur', m.dur);
+    const hero = document.getElementById('se-hero-video');
+    if (hero) hero.style.animation = (this.props.motion === 'Off') ? 'none' : '';
+  }
+
+  componentDidMount(){
+    this.applyTheme();
+    if (this.props.motion === 'Off') {
+      this.setState({ loading:false });
+    } else {
+      this._t1 = setTimeout(() => this.setState({ leaving:true }), 1700);
+      this._t2 = setTimeout(() => this.setState({ loading:false }), 2450);
+    }
+    const vid = document.getElementById('se-hero-video');
+    if (vid) {
+      vid.loop = true;
+      const kick = () => { const p = vid.play(); if (p && p.catch) p.catch(()=>{}); };
+      kick();
+      vid.addEventListener('ended', () => { vid.currentTime = 0; kick(); });
+      vid.addEventListener('pause', () => { if (!vid.ended && !document.hidden) kick(); });
+      vid.addEventListener('stalled', kick);
+      vid.addEventListener('canplay', kick);
+      // Conceal the watermark only while footage plays (faded out during the logo intro); reads
+      // currentTime each frame so it stays correct across loops and any buffering stalls.
+      const mask = document.getElementById('se-wm-mask');
+      if (mask) {
+        const sync = () => {
+          const t = vid.currentTime || 0;
+          mask.style.opacity = (t >= 1.7) ? '1' : '0';
+          this._maskRAF = requestAnimationFrame(sync);
+        };
+        sync();
+      }
+    }
+    this._heroContent = document.getElementById('se-hero-content');
+    this._nav = document.getElementById('se-nav');
+    this._navGlow = document.getElementById('se-nav-glow');
+    this._parallaxEls = Array.from(document.querySelectorAll('[data-parallax]'));
+    const SECT = ['careers','enquire','newsroom','projects','about','top'];
+    this._onScroll = () => {
+      const y = window.scrollY;
+      const s = y > 40;
+      const doc = document.documentElement;
+      const max = (doc.scrollHeight - window.innerHeight) || 1;
+      const pct = Math.max(0, Math.min(1, y / max));
+      if (ENABLE_SCROLL_EFFECTS && this._heroContent && y < window.innerHeight) this._heroContent.style.transform = 'translateY(' + (y * -0.06) + 'px)';
+      if (ENABLE_SCROLL_EFFECTS && this._parallaxEls && this._parallaxEls.length){
+        const vh = window.innerHeight || 800;
+        for (const el of this._parallaxEls){
+          const r = el.getBoundingClientRect();
+          const off = ((r.top + r.height/2) - vh/2) / vh;
+          const sp = parseFloat(el.getAttribute('data-parallax')) || 0.1;
+          el.style.transform = 'translate3d(0,' + (off * sp * 70).toFixed(1) + 'px,0)';
+        }
+      }
+      let active = 'top';
+      const mid = y + window.innerHeight * 0.34;
+      for (const id of SECT) { const el = document.getElementById(id); if (el && el.offsetTop <= mid) { active = id; break; } }
+      const ns = {};
+      if (s !== this.state.scrolled) ns.scrolled = s;
+      const pctStr = (pct*100).toFixed(1) + '%';
+      if (pctStr !== this.state.scrollPct) ns.scrollPct = pctStr;
+      if (active !== this.state.activeSection) ns.activeSection = active;
+      if (Object.keys(ns).length) this.setState(ns);
+    };
+    window.addEventListener('scroll', this._onScroll, { passive:true });
+
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('in');
+          if (e.target.hasAttribute('data-counter')) this.runCounter(e.target);
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold:0.14, rootMargin:'0px 0px -7% 0px' });
+    this._io = io;
+    this._observe = () => {
+      document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+      document.querySelectorAll('.reveal-mask').forEach(el => io.observe(el));
+      document.querySelectorAll('[data-counter]').forEach(el => io.observe(el));
+    };
+    requestAnimationFrame(this._observe);
+    requestAnimationFrame(this._bindImgs);
+    setTimeout(this._bindImgs, 200);
+
+    this._glow = document.getElementById('se-glow');
+    this._onMove = (ev) => {
+      if (this._glow) {
+        this._glow.style.transform = 'translate(' + (ev.clientX - 230) + 'px,' + (ev.clientY - 230) + 'px)';
+        this._glow.style.opacity = (this.props.motion === 'Off') ? '0' : '0.5';
+      }
+      if (ENABLE_SCROLL_EFFECTS && this._navGlow && this._nav) {
+        const r = this._nav.getBoundingClientRect();
+        if (ev.clientY >= r.top && ev.clientY <= r.bottom) {
+          this._navGlow.style.opacity = '0.5';
+          this._navGlow.style.transform = 'translateX(' + (ev.clientX - r.left - 130) + 'px)';
+        } else {
+          this._navGlow.style.opacity = '0';
+        }
+      }
+    };
+    window.addEventListener('mousemove', this._onMove, { passive:true });
+
+    this.initParticles();
+    this._tiltEl = null;
+    this._onTilt = (ev) => {
+      // Never tilt a card while the pointer is over an interactive element — keeps buttons/links stable to click.
+      const interactive = ev.target && ev.target.closest ? ev.target.closest('button,a,input,select,textarea,label') : null;
+      const el = (interactive || !ev.target || !ev.target.closest) ? null : ev.target.closest('[data-tilt]');
+      if (this._tiltEl && this._tiltEl !== el) { this._tiltEl.style.transform = ''; this._tiltEl = null; }
+      if (!el || window.matchMedia('(hover:none)').matches) return;
+      this._tiltEl = el;
+      const r = el.getBoundingClientRect();
+      const px = (ev.clientX - r.left) / r.width - .5;
+      const py = (ev.clientY - r.top) / r.height - .5;
+      const max = parseFloat(el.getAttribute('data-tilt')) || 5;
+      el.style.transform = 'perspective(1000px) rotateY(' + (px*max).toFixed(2) + 'deg) rotateX(' + (-py*max).toFixed(2) + 'deg)';
+    };
+    window.addEventListener('pointermove', this._onTilt, { passive:true });
+  }
+
+  initParticles(){
+    if (this.props.motion === 'Off') return;
+    const cv = document.getElementById('se-particles');
+    if (!cv) return;
+    const ctx = cv.getContext('2d');
+    let w=0,h=0; const dpr = Math.min(2, window.devicePixelRatio || 1);
+    const resize = () => { const r = cv.getBoundingClientRect(); w=r.width||1; h=r.height||1; cv.width=w*dpr; cv.height=h*dpr; ctx.setTransform(dpr,0,0,dpr,0,0); };
+    resize();
+    this._pResize = resize; window.addEventListener('resize', resize);
+    const N = Math.max(22, Math.min(54, Math.round(w/28)));
+    const P = Array.from({length:N}, () => ({ x:Math.random()*w, y:Math.random()*h, r:Math.random()*1.6+.5, s:Math.random()*.35+.1, d:Math.random()*Math.PI*2, o:Math.random()*.45+.18 }));
+    const draw = () => {
+      ctx.clearRect(0,0,w,h);
+      for (const p of P){
+        p.y -= p.s; p.d += 0.01; p.x += Math.sin(p.d)*0.22;
+        if (p.y < -6){ p.y = h+6; p.x = Math.random()*w; }
+        const rr = p.r*4;
+        const g = ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,rr);
+        g.addColorStop(0,'rgba(240,220,160,'+p.o+')');
+        g.addColorStop(1,'rgba(240,220,160,0)');
+        ctx.fillStyle=g; ctx.beginPath(); ctx.arc(p.x,p.y,rr,0,Math.PI*2); ctx.fill();
+      }
+      this._pRAF = requestAnimationFrame(draw);
+    };
+    draw();
+  }
+
+  _bindImgs = () => {
+    document.querySelectorAll('img[data-src]').forEach(i => {
+      const s = i.getAttribute('data-src');
+      if (s && s.indexOf('{{') === -1 && i.getAttribute('src') !== s) i.setAttribute('src', s);
+    });
+  };
+
+  _pageReveal = () => {
+    const w = document.getElementById('se-page-scroll');
+    if (!w) return;
+    this._bindImgs();
+    const vh = window.innerHeight || 800;
+    w.querySelectorAll('.reveal, .reveal-mask').forEach(el => {
+      const r = el.getBoundingClientRect();
+      if (r.top < vh * 0.9 && r.bottom > 30) el.classList.add('in');
+    });
+  };
+
+  componentDidUpdate(){
+    this.applyTheme();
+    this._bindImgs();
+    if (this._observe) requestAnimationFrame(this._observe);
+    if (this.state.pageKey){
+      const w = document.getElementById('se-page-scroll');
+      if (w && !w._seBound){ w._seBound = true; w.addEventListener('scroll', this._pageReveal, { passive:true }); }
+      requestAnimationFrame(this._pageReveal);
+      setTimeout(this._pageReveal, 120);
+    }
+  }
+
+  componentWillUnmount(){
+    window.removeEventListener('scroll', this._onScroll);
+    window.removeEventListener('mousemove', this._onMove);
+    if (this._onTilt) window.removeEventListener('pointermove', this._onTilt);
+    if (this._pResize) window.removeEventListener('resize', this._pResize);
+    if (this._pRAF) cancelAnimationFrame(this._pRAF);
+    if (this._t1) clearTimeout(this._t1);
+    if (this._t2) clearTimeout(this._t2);
+    if (this._io) this._io.disconnect();
+    if (this._maskRAF) cancelAnimationFrame(this._maskRAF);
+  }
+
+  runCounter(el){
+    if (el._done) return; el._done = true;
+    const target = parseFloat(el.getAttribute('data-counter'));
+    const dec = el.getAttribute('data-dec') ? parseInt(el.getAttribute('data-dec'),10) : 0;
+    const dur = 1700, start = performance.now();
+    const tick = (now) => {
+      const t = Math.min(1, (now - start) / dur);
+      const eased = 1 - Math.pow(1 - t, 3);
+      const val = target * eased;
+      el.textContent = dec ? val.toFixed(dec) : Math.round(val).toLocaleString('en-IN');
+      if (t < 1) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  }
+
+  openModal = () => this.setState({ modalOpen:true, sent:false });
+  openModalMobile = () => this.setState({ modalOpen:true, sent:false, mobileOpen:false });
+  closeModal = () => this.setState({ modalOpen:false });
+  toggleMobile = () => this.setState({ mobileOpen:!this.state.mobileOpen });
+  closeMobile = () => this.setState({ mobileOpen:false });
+  openAbout = () => this.setState({ aboutOpen:true });
+  closeAbout = () => this.setState({ aboutOpen:false });
+  toggleAbout = () => this.setState({ aboutOpen:!this.state.aboutOpen });
+  openPage = (key) => {
+    this.setState({ pageKey:key, pageLeaving:false, aboutOpen:false, mobileOpen:false });
+    try { document.documentElement.style.overflow = 'hidden'; document.body.style.overflow = 'hidden'; } catch(_){}
+    requestAnimationFrame(() => { const w = document.getElementById('se-page-scroll'); if (w) w.scrollTop = 0; });
+  };
+  openAboutPage = (e) => { if (e && e.preventDefault) e.preventDefault(); this.openPage('about'); };
+  openAboutPageMobile = (e) => { if (e && e.preventDefault) e.preventDefault(); this.openPage('about'); };
+  openProjects = () => this.setState({ projectsOpen:true });
+  closeProjects = () => this.setState({ projectsOpen:false });
+  openProjectsPage = (e) => { if (e && e.preventDefault) e.preventDefault(); this.openPage('projects'); };
+  openKinara = (e) => { if (e && e.preventDefault) e.preventDefault(); this.openPage('kinara'); };
+  openEvershine = (e) => { if (e && e.preventDefault) e.preventDefault(); this.openPage('evershine'); };
+  openLifestyle = (e) => { if (e && e.preventDefault) e.preventDefault(); this.openPage('lifestyle'); };
+  openGallery = (e) => { if (e && e.preventDefault) e.preventDefault(); this.openPage('gallery'); };
+  openBlogs = (e) => { if (e && e.preventDefault) e.preventDefault(); this.openPage('blogs'); };
+  openContact = (e) => { if (e && e.preventDefault) e.preventDefault(); this.openPage('contact'); };
+  openBook = (e) => { if (e && e.preventDefault) e.preventDefault(); this.openPage('book'); };
+  openBookMobile = (e) => { if (e && e.preventDefault) e.preventDefault(); this.openPage('book'); };
+  openCsr = (e) => { if (e && e.preventDefault) e.preventDefault(); this.openPage('csr'); };
+  openCareers = (e) => { if (e && e.preventDefault) e.preventDefault(); this.openPage('careers'); };
+  openPrivacy = (e) => { if (e && e.preventDefault) e.preventDefault(); this.openPage('privacy'); };
+  openTerms = (e) => { if (e && e.preventDefault) e.preventDefault(); this.openPage('terms'); };
+  openRera = (e) => { if (e && e.preventDefault) e.preventDefault(); this.openPage('rera'); };
+  closePage = (e) => {
+    if (e && e.preventDefault) e.preventDefault();
+    this.setState({ pageLeaving:true });
+    setTimeout(() => {
+      this.setState({ pageKey:null, pageLeaving:false });
+      try { document.documentElement.style.overflow = ''; document.body.style.overflow = ''; } catch(_){}
+    }, 480);
+  };
+  stop = (e) => { e.stopPropagation(); };
+  submitForm = (e) => { e.preventDefault(); this.setState({ sent:true }); };
+  navSearch = (e) => {
+    e.preventDefault();
+    const el = document.getElementById('se-search-panel');
+    if (el) {
+      const y = el.getBoundingClientRect().top + window.scrollY - 88;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+      const sel = el.querySelector('select');
+      if (sel) setTimeout(() => sel.focus(), 500);
+    }
+  };
+
+  renderVals(){
+    const scrolled = this.state.scrolled;
+    const light = scrolled ? '#0B1325' : '#FAF8F3';
+    const fx = ENABLE_SCROLL_EFFECTS;
+    const navShimmerStyle = { position:'absolute', left:0, right:0, bottom:'-1px', height:'1px', background:'linear-gradient(90deg,transparent,var(--se-strong),var(--se-hi),transparent)', backgroundSize:'45% 100%', backgroundRepeat:'no-repeat', backgroundPosition:'-150% 0', opacity: scrolled ? 0.9 : 0, animation: fx ? 'seNavShimmer 6.5s linear infinite' : 'none', transition:'opacity .6s ease', pointerEvents:'none', zIndex:1 };
+    const navGlowStyle = { position:'absolute', top:0, bottom:0, left:0, width:'260px', borderRadius:'9999px', pointerEvents:'none', background:'radial-gradient(circle, rgba(212,175,55,.30), rgba(240,220,160,.12) 42%, transparent 70%)', filter:'blur(16px)', mixBlendMode:'screen', opacity:0, transform:'translateX(-300px)', transition:'opacity .4s ease', zIndex:0, display: fx ? 'block' : 'none' };
+
+    const introName = this.props.intro || 'Onyx Minimal';
+    const introBloom = introName === 'Champagne Bloom';
+    const introSweep = introName === 'Light Sweep';
+    const loaderStyle = { position:'fixed', inset:0, zIndex:200, display:'flex', alignItems:'center', justifyContent:'center', background:'radial-gradient(circle at 50% 42%, #15213f 0%, #0B1325 55%, #060a14 100%)', opacity: this.state.leaving ? 0 : 1, transform: this.state.leaving ? 'scale(1.05)' : 'scale(1)', transition:'opacity .7s ease, transform .9s cubic-bezier(.16,1,.3,1)', pointerEvents: this.state.leaving ? 'none' : 'auto' };
+
+    const navStyle = {
+      position:'fixed', top:0, left:0, right:0, zIndex:70,
+      display:'flex', alignItems:'center', padding:'0 clamp(24px,6vw,96px)',
+      height: scrolled ? '66px' : '92px',
+      backgroundColor: scrolled ? 'rgba(250,248,243,0.96)' : 'transparent',
+      backdropFilter: scrolled ? 'saturate(150%) blur(16px)' : 'none',
+      WebkitBackdropFilter: scrolled ? 'saturate(150%) blur(16px)' : 'none',
+      borderBottom: scrolled ? '1px solid rgba(43,43,43,0.08)' : '1px solid transparent',
+      boxShadow: scrolled ? '0 16px 50px -32px rgba(43,43,43,.55)' : 'none',
+      transition:'height .45s cubic-bezier(.16,1,.3,1), background-color .45s, box-shadow .45s, border-color .45s'
+    };
+    const navLinkStyle = { color:light, fontSize:'14px', fontWeight:500, letterSpacing:'.01em', textDecoration:'none', cursor:'pointer', backgroundColor:'transparent', backgroundImage:'var(--se-grad)', backgroundRepeat:'no-repeat', backgroundPosition:'0 100%', backgroundSize:'0% 2px', border:0, fontFamily:'inherit', transition:'background-size .4s cubic-bezier(.16,1,.3,1), color .45s', display:'inline-flex', alignItems:'center', gap:'5px', paddingBottom:'4px' };
+    const navLinkHover = { backgroundSize:'100% 2px' };
+    const _active = this.state.activeSection;
+    const mkNav = (id) => _active === id ? { ...navLinkStyle, backgroundSize:'100% 2px' } : navLinkStyle;
+    const navProjects = mkNav('projects'), navAbout = mkNav('about'), navNewsroom = mkNav('newsroom'), navCareers = mkNav('careers'), navContact = mkNav('enquire');
+
+    const searchBorder = scrolled ? 'rgba(43,43,43,0.16)' : 'rgba(250,248,243,0.38)';
+    const searchBg = scrolled ? 'rgba(43,43,43,0.03)' : 'rgba(250,248,243,0.07)';
+    const searchBarStyle = { display:'flex', alignItems:'center', gap:'8px', padding:'9px 14px', borderRadius:'9999px', border:'1px solid '+searchBorder, backgroundColor:searchBg, color:light, width:'138px', boxSizing:'border-box', transition:'border-color .45s, background-color .45s, color .45s' };
+    const searchInputStyle = { border:0, outline:'none', backgroundColor:'transparent', fontFamily:'inherit', fontSize:'13px', fontWeight:500, color:light, width:'100%', minWidth:0, padding:0, transition:'color .45s' };
+    const logoTextStyle = { fontSize:'17px', fontWeight:600, letterSpacing:'.06em', color:light, transition:'color .45s' };
+    const burgerLine = { display:'block', height:'2px', width:'24px', background:light, borderRadius:'2px', transition:'background .45s' };
+
+    const _mkOpen = (key) => (e) => { if (e && e.preventDefault) e.preventDefault(); this.openPage(key); };
+    const projectsItems = [
+      { title:'Kinara — The Waterline Residences', desc:'Andheri West · Now selling', open:_mkOpen('kinara') },
+      { title:'Evershine Avenue', desc:'Powai · New launch', open:_mkOpen('evershine') },
+      { title:'All Projects', desc:'Browse the full portfolio', open:_mkOpen('projects') },
+      { title:'Book a Site Visit', desc:'See a show home in person', open:_mkOpen('book') }
+    ];
+    const aboutItems = [
+      { glyph:'◐', title:'About Stable Evershine', desc:'Our story, craft & promise', open:_mkOpen('about') },
+      { glyph:'☀', title:'Vision', desc:'Where we are headed', open:_mkOpen('vision') },
+      { glyph:'◆', title:'Directors & Leadership', desc:'The people behind the brand', open:_mkOpen('directors') },
+      { glyph:'✦', title:'Mission', desc:'What we build for', open:_mkOpen('mission') },
+      { glyph:'❖', title:'Careers', desc:'Grow with us', open:_mkOpen('careers') }
+    ];
+
+    const PAGES = {
+      about: {
+        eyebrow:'The Evershine Story', hero:'assets/aerial-rooftop.jpg',
+        title:'Building brighter beginnings for nearly two decades.',
+        intro:'Stable Evershine is a design-led developer crafting limited-edition residences around light, craft and a calmer way of living. Every address we raise is a promise of growth, trust and prosperity — kept in stone, glass and the quiet detail you only notice over years.',
+        stats:[{k:'18+',v:'Years of trust'},{k:'4.2M',v:'Sq.ft delivered'},{k:'12,000+',v:'Families served'},{k:'24',v:'Landmarks built'}],
+        sections:[
+          {img:'assets/lobby.jpg', h:'Who we are', p:'Founded on the belief that a home should age as gracefully as it arrives, Stable Evershine has spent two decades refining a single idea — that permanence and warmth are not opposites. We build for the long morning, not the quick sale.'},
+          {img:'assets/tower-day.jpg', h:'How we build', p:'Two homes per floor, imported stone, framed sunrise views and specifications usually reserved for the floors above the penthouse line. Our briefs start with light and end with the smallest brass detail on a door you will touch ten thousand times.'},
+          {img:'assets/bedroom.jpg', h:'What guides us', p:'Growth, trust, prosperity and excellence are not taglines here; they are the working brief for every wall we raise. We measure success in families who stay, refer, and return for their second Evershine address.'}
+        ]
+      },
+      vision: {
+        eyebrow:'Our Vision', hero:'assets/hero-tower-night.jpg',
+        title:'A city where every sunrise begins a new chapter.',
+        intro:'We imagine neighbourhoods shaped around natural light, generous green and a slower, more considered rhythm of living — landmarks that feel inevitable a decade after they are built.',
+        stats:[{k:'2030',v:'Carbon-light goal'},{k:'40%',v:'Open & green space'},{k:'9',v:'Cities planned'},{k:'100%',v:'Sunrise-led design'}],
+        sections:[
+          {img:'assets/aerial-rooftop.jpg', h:'The long view', p:'Our vision is measured in decades, not quarters. Every masterplan asks one question first — how will this feel to live in twenty years from now, when the trees have grown and the brass has earned its patina?'},
+          {img:'assets/recreation.jpg', h:'Light as architecture', p:'We design around the path of the sun, so homes wake with the morning and soften at dusk. Orientation, glazing and depth are tuned before a single elevation is drawn.'},
+          {img:'assets/dining.jpg', h:'Communities, not complexes', p:'Shared gardens, walkable cores and quiet courtyards are written into the brief — places that give residents their time, and their neighbours, back.'}
+        ]
+      },
+      directors: {
+        eyebrow:'Directors & Leadership', hero:'assets/lobby.jpg',
+        title:'The people behind the promise.',
+        intro:'A close-knit leadership team of builders, designers and stewards — each accountable for the detail you will live with long after the handover.',
+        stats:[{k:'5',v:'Board members'},{k:'120+',v:'Years combined'},{k:'8',v:'Design awards'},{k:'1',v:'Shared standard'}],
+        sections:[
+          {img:'assets/banquet.jpg', h:'Aarav Mehta — Chairman', p:'Founder and custodian of the Evershine standard. Three decades in real estate, with an unbending rule that no compromise survives contact with a finished home.'},
+          {img:'assets/bedroom.jpg', h:'Diya Kapoor — Managing Director', p:'Leads design and delivery. Trained as an architect, she keeps every project tethered to its first sketch — light, proportion and restraint above all.'},
+          {img:'assets/gym.jpg', h:'Rohan Shah — Director, Construction', p:'Runs the sites. Obsessed with tolerances, materials and the long-term behaviour of every wall, joint and finish we sign off.'}
+        ]
+      },
+      mission: {
+        eyebrow:'Our Mission', hero:'assets/tower-day.jpg',
+        title:'Homes built the way light builds a morning.',
+        intro:'To craft residences that are generous, enduring and quietly excellent — and to be the developer families trust with the most important decision they make.',
+        stats:[{k:'100%',v:'On-time delivery'},{k:'15yr',v:'Structural warranty'},{k:'0',v:'Compromise policy'},{k:'4.9',v:'Owner rating'}],
+        sections:[
+          {img:'assets/dining.jpg', h:'Build to endure', p:'We specify for the second decade, not the launch brochure — materials and systems chosen because of how they behave in year fifteen, not week one.'},
+          {img:'assets/lobby.jpg', h:'Be radically transparent', p:'Open delivery roadmaps, honest timelines and a single point of accountability. We would rather lose a sale than a family\u2019s trust.'},
+          {img:'assets/recreation.jpg', h:'Give time back', p:'Every amenity, layout and service is judged by one test — does it quietly hand residents more of their day? If not, it does not make the plan.'}
+        ]
+      },
+      careers: {
+        eyebrow:'Careers', hero:'assets/gym.jpg',
+        title:'Grow with a studio that builds for the long morning.',
+        intro:'We are a small team that cares deeply about craft. If you find joy in the detail others overlook, there is a place for you here.',
+        stats:[{k:'60+',v:'Team members'},{k:'4.8',v:'Glassdoor score'},{k:'12',v:'Open roles'},{k:'92%',v:'Stay 5+ years'}],
+        sections:[
+          {img:'assets/banquet.jpg', h:'Why join us', p:'Real ownership, short reporting lines and projects you can point to for the rest of your life. We hire slowly and invest deeply in the people who stay.'},
+          {img:'assets/recreation.jpg', h:'How we work', p:'Calm, considered and allergic to busywork. We protect deep focus, design in the open and let the best idea win regardless of who it comes from.'},
+          {img:'assets/dining.jpg', h:'Open roles', p:'Architecture, project delivery, sales experience and brand. Send your portfolio and a note on the detail you are most proud of — that is the part we read first.'}
+        ]
+      },
+      projects: {
+        eyebrow:'The Portfolio', hero:'assets/aerial-rooftop.jpg',
+        title:'A small portfolio, obsessively made.',
+        intro:'We build few addresses, and we build them slowly. Each is a limited-edition landmark designed around light, craft and a calmer rhythm of living — explore the homes selling now and the launches ahead.',
+        chips:['Now Selling','New Launch','Andheri West','Powai'],
+        cards:[
+          { key:'kinara', img:'assets/tower-day.jpg', status:'Now Selling', loc:'Andheri West', name:'Kinara', sub:'The Waterline Residences', desc:'Two homes per floor, framed sunrise views and a triple-height marble arrival. 2, 3 & 4 BHK sky residences on the waterline.' },
+          { key:'evershine', img:'assets/hero-tower-night.jpg', status:'New Launch', loc:'Powai', name:'Evershine Avenue', sub:'Lakeside Collection', desc:'A lakeside tower of light-led homes wrapped in green, with a sky club and lap pool above the treeline. 2 & 3 BHK residences.' }
+        ],
+        stats:[{k:'2',v:'Live projects'},{k:'24',v:'Landmarks built'},{k:'4.2M',v:'Sq.ft delivered'},{k:'100%',v:'On-time record'}]
+      },
+      kinara: {
+        eyebrow:'Kinara — Andheri West', hero:'assets/tower-day.jpg',
+        title:'Kinara — the Waterline Residences.',
+        intro:'A sculpted landmark where glass, stone and light meet the waterline. Two homes per floor, generous frontage and a triple-height arrival set the tone for a quieter, more considered way of living.',
+        chips:['Now Selling','2 / 3 / 4 BHK','2 homes per floor','RERA registered'],
+        stats:[{k:'2',v:'Homes per floor'},{k:'780–1,640',v:'Carpet ft²'},{k:'18',v:'Curated amenities'},{k:'Dec 2027',v:'Possession'}],
+        sections:[
+          {img:'assets/lobby.jpg', h:'Overview', p:'Kinara rises in two private residences per floor, each with framed sunrise views and a triple-height arrival lobby in marble and brass. The brief began with light and ended with the smallest detail you will touch every day.'},
+          {img:'assets/bedroom.jpg', h:'The residences', p:'Imported marble flooring, floor-to-ceiling glazing, VRV climate control and branded modular kitchens — a specification usually reserved for the floors above the penthouse line, given to every home.'}
+        ],
+        amen:[
+          {tag:'Wellness', t:'Sky infinity pool', img:'assets/recreation.jpg'},
+          {tag:'Fitness', t:'Double-height gym', img:'assets/gym.jpg'},
+          {tag:'Gather', t:'Private banquet', img:'assets/banquet.jpg'},
+          {tag:'Dining', t:'Residents\u2019 lounge', img:'assets/dining.jpg'},
+          {tag:'Arrival', t:'Marble lobby', img:'assets/lobby.jpg'},
+          {tag:'Open air', t:'Rooftop sky garden', img:'assets/aerial-rooftop.jpg'}
+        ],
+        floor:[
+          {t:'2 BHK', a:'780 – 940 ft²', d:'Efficient light-led layouts with a wide living frontage and framed balcony views.'},
+          {t:'3 BHK', a:'1,180 – 1,360 ft²', d:'A private bedroom wing, utility and a deep balcony built for slow mornings.'},
+          {t:'4 BHK', a:'1,520 – 1,640 ft²', d:'Corner residences with wrap-around balconies and dual-aspect sunrise light.'}
+        ],
+        gallery:[
+          {t:'Tower at dusk', img:'assets/tower-day.jpg'},
+          {t:'Arrival lobby', img:'assets/lobby.jpg'},
+          {t:'Living room', img:'assets/dining.jpg'},
+          {t:'Primary bedroom', img:'assets/bedroom.jpg'},
+          {t:'Sky garden', img:'assets/aerial-rooftop.jpg'},
+          {t:'Pool deck', img:'assets/recreation.jpg'}
+        ],
+        loc:[
+          {tag:'Transit', name:'Metro Station', time:'6 min'},
+          {tag:'Air', name:'International Airport', time:'28 min'},
+          {tag:'Work', name:'Central Business Park', time:'12 min'},
+          {tag:'Learn', name:'International School', time:'8 min'},
+          {tag:'Care', name:'Multi-speciality Hospital', time:'10 min'},
+          {tag:'Leisure', name:'Seafront Promenade', time:'15 min'}
+        ]
+      },
+      evershine: {
+        eyebrow:'Evershine Avenue — Powai', hero:'assets/hero-tower-night.jpg',
+        title:'Evershine Avenue — the Lakeside Collection.',
+        intro:'A lakeside tower of light-led homes wrapped in green, with a sky club and lap pool set above the treeline. A new launch designed for families who want the city close and the calm closer.',
+        chips:['New Launch','2 / 3 BHK','Lakeside','RERA registered'],
+        stats:[{k:'2 & 3',v:'BHK homes'},{k:'640–1,240',v:'Carpet ft²'},{k:'40%',v:'Open & green'},{k:'Jun 2028',v:'Possession'}],
+        sections:[
+          {img:'assets/aerial-rooftop.jpg', h:'Overview', p:'Evershine Avenue is shaped around the lake and the light it carries through the day. A landscaped podium, walkable core and quiet courtyards give every resident their time, and their neighbours, back.'},
+          {img:'assets/recreation.jpg', h:'The residences', p:'Compact, generous homes with wide glazing, cross-ventilation and balconies framed for the water. Branded fittings and smart-home wiring come standard across the collection.'}
+        ],
+        amen:[
+          {tag:'Wellness', t:'Sky lap pool', img:'assets/recreation.jpg'},
+          {tag:'Fitness', t:'Lakeview gym', img:'assets/gym.jpg'},
+          {tag:'Gather', t:'Sky club lounge', img:'assets/banquet.jpg'},
+          {tag:'Dining', t:'Private dining', img:'assets/dining.jpg'},
+          {tag:'Arrival', t:'Green lobby', img:'assets/lobby.jpg'},
+          {tag:'Open air', t:'Podium gardens', img:'assets/aerial-rooftop.jpg'}
+        ],
+        floor:[
+          {t:'2 BHK', a:'640 – 820 ft²', d:'Bright, efficient homes with a lake-facing balcony and zero wasted circulation.'},
+          {t:'3 BHK', a:'1,020 – 1,240 ft²', d:'A family layout with utility, study nook and a deep entertaining balcony.'}
+        ],
+        gallery:[
+          {t:'Tower at night', img:'assets/hero-tower-night.jpg'},
+          {t:'Podium gardens', img:'assets/aerial-rooftop.jpg'},
+          {t:'Sky club', img:'assets/banquet.jpg'},
+          {t:'Living space', img:'assets/dining.jpg'},
+          {t:'Bedroom', img:'assets/bedroom.jpg'},
+          {t:'Lap pool', img:'assets/recreation.jpg'}
+        ],
+        loc:[
+          {tag:'Transit', name:'Metro Station', time:'9 min'},
+          {tag:'Air', name:'International Airport', time:'22 min'},
+          {tag:'Work', name:'Tech Park', time:'7 min'},
+          {tag:'Learn', name:'International School', time:'6 min'},
+          {tag:'Care', name:'Multi-speciality Hospital', time:'9 min'},
+          {tag:'Leisure', name:'Lakeside Promenade', time:'4 min'}
+        ]
+      },
+      lifestyle: {
+        eyebrow:'The Evershine Lifestyle', hero:'assets/recreation.jpg',
+        title:'A calmer way of living, by design.',
+        intro:'From sky gardens that catch the morning to a concierge that quietly handles the rest, every day at an Evershine address is shaped to give you more of it back. This is what life feels like between the four walls and beyond them.',
+        chips:['Concierge','Sky gardens','Wellness','Walkable cores'],
+        sections:[
+          {img:'assets/aerial-rooftop.jpg', h:'Mornings, slower', p:'Homes wake with the sunrise and soften at dusk. Open green, walkable courtyards and framed light are written into the brief, so the day starts gently and stays that way.'},
+          {img:'assets/gym.jpg', h:'Wellness, woven in', p:'Double-height gyms, lap pools above the treeline and quiet wellness rooms mean the healthiest version of your routine is the easiest one to keep.'}
+        ],
+        amen:[
+          {tag:'Wellness', t:'Infinity pool', img:'assets/recreation.jpg'},
+          {tag:'Fitness', t:'Signature gym', img:'assets/gym.jpg'},
+          {tag:'Gather', t:'Banquet & events', img:'assets/banquet.jpg'},
+          {tag:'Dining', t:'Residents\u2019 dining', img:'assets/dining.jpg'},
+          {tag:'Arrival', t:'Grand lobby', img:'assets/lobby.jpg'},
+          {tag:'Open air', t:'Sky gardens', img:'assets/aerial-rooftop.jpg'}
+        ],
+        gallery:[
+          {t:'Sky garden', img:'assets/aerial-rooftop.jpg'},
+          {t:'Pool deck', img:'assets/recreation.jpg'},
+          {t:'Wellness suite', img:'assets/gym.jpg'},
+          {t:'Private dining', img:'assets/dining.jpg'}
+        ]
+      },
+      gallery: {
+        eyebrow:'Gallery & Media', hero:'assets/lobby.jpg',
+        title:'The portfolio, in light and stone.',
+        intro:'A closer look at our architecture, interiors and amenities — renders and photography from across the Evershine collection.',
+        chips:['Architecture','Interiors','Amenities','Renders'],
+        gallery:[
+          {t:'Kinara — tower', img:'assets/tower-day.jpg'},
+          {t:'Evershine Avenue — night', img:'assets/hero-tower-night.jpg'},
+          {t:'Rooftop sky garden', img:'assets/aerial-rooftop.jpg'},
+          {t:'Marble arrival lobby', img:'assets/lobby.jpg'},
+          {t:'Residents\u2019 lounge', img:'assets/dining.jpg'},
+          {t:'Primary bedroom', img:'assets/bedroom.jpg'},
+          {t:'Signature gym', img:'assets/gym.jpg'},
+          {t:'Banquet hall', img:'assets/banquet.jpg'},
+          {t:'Pool & recreation deck', img:'assets/recreation.jpg'}
+        ]
+      },
+      blogs: {
+        eyebrow:'Blogs & Insights', hero:'assets/bedroom.jpg',
+        title:'Notes on light, craft and the long view.',
+        intro:'Thinking from the studio — on designing around the sunrise, the materials we choose, and what it takes to build homes meant to age gracefully.',
+        chips:['Brand','Design','Lifestyle','Press'],
+        posts:[
+          {cat:'Brand', title:'The philosophy of light: designing homes around the sunrise', date:'Jun 2026', read:'5 min read', img:'assets/aerial-rooftop.jpg'},
+          {cat:'Projects', title:'Kinara tops out — a new landmark rises on the waterline', date:'May 2026', read:'3 min read', img:'assets/tower-day.jpg'},
+          {cat:'Lifestyle', title:'Inside the residences: the materials made to endure', date:'May 2026', read:'4 min read', img:'assets/bedroom.jpg'},
+          {cat:'Press', title:'Stable Evershine among India\u2019s design-led developers', date:'Apr 2026', read:'2 min read', img:'assets/lobby.jpg'},
+          {cat:'Lifestyle', title:'Amenities that quietly give your time back', date:'Apr 2026', read:'4 min read', img:'assets/gym.jpg'},
+          {cat:'Projects', title:'Our 2027 delivery roadmap, in the open', date:'Mar 2026', read:'3 min read', img:'assets/banquet.jpg'}
+        ]
+      },
+      contact: {
+        eyebrow:'Contact', hero:'',
+        title:'Let\u2019s find your address.',
+        intro:'Tell us a little about what you are looking for and our residence team will be in touch within one business day.',
+        form:{
+          heading:'Speak with our residence team', sub:'Share your details and we will reach out with availability, pricing and a private viewing.',
+          info:[
+            {icon:'\u260E', label:'Phone', value:'+91 22 4000 8000'},
+            {icon:'\u2709', label:'Email', value:'residences@stableevershine.com'},
+            {icon:'\u25C9', label:'Experience Centre', value:'Andheri West, Mumbai · 10am – 7pm'}
+          ],
+          success:'Your enquiry is in. Our residence team will reach out within one business day.',
+          submit:'Send enquiry'
+        }
+      },
+      book: {
+        eyebrow:'Book a Site Visit', hero:'',
+        title:'See a show home in person.',
+        intro:'Walk the residences, feel the light and the materials, and meet the team. Choose a time that suits you and we will take care of the rest.',
+        form:{
+          heading:'Reserve your private viewing', sub:'Pick a project, a preferred date and a time slot. We will confirm by phone and arrange your chauffeur on request.',
+          info:[
+            {icon:'\u25C9', label:'Kinara Experience Centre', value:'Andheri West, Mumbai'},
+            {icon:'\u25C9', label:'Evershine Avenue Site', value:'Powai, Mumbai'},
+            {icon:'\u260E', label:'Site Visit Desk', value:'+91 22 4000 8010'}
+          ],
+          success:'Your site visit request is in. We will call to confirm your slot shortly.',
+          submit:'Request site visit'
+        }
+      },
+      csr: {
+        eyebrow:'CSR & Sustainability', hero:'assets/aerial-rooftop.jpg',
+        title:'Building lighter, giving back deeper.',
+        intro:'Sustainability is written into the brief, not bolted on after. From carbon-light design to the communities around our sites, we measure our work by the good it leaves behind.',
+        chips:['Carbon-light','Green cover','Community','Water-positive'],
+        stats:[{k:'40%',v:'Open & green space'},{k:'2030',v:'Carbon-light goal'},{k:'100%',v:'Rainwater harvested'},{k:'12',v:'Community programs'}],
+        sections:[
+          {img:'assets/recreation.jpg', h:'Designing lighter', p:'Orientation, glazing and shading cut cooling loads before a single panel is added. Every masterplan targets a smaller footprint across its whole life, not just its launch.'},
+          {img:'assets/dining.jpg', h:'Giving back', p:'We invest in the neighbourhoods around our sites — schools, green corridors and skilling programs for the trades who build with us. Good buildings should lift the ground they stand on.'}
+        ]
+      },
+      privacy: {
+        eyebrow:'Legal', hero:'',
+        title:'Privacy Policy.',
+        intro:'How Stable Evershine collects, uses and protects the information you share with us.',
+        legal:[
+          {h:'Information we collect', p:'We collect the details you provide through enquiry and site-visit forms — your name, phone number, email and project preferences — along with basic analytics about how our website is used. We do not collect sensitive personal data without your explicit consent.'},
+          {h:'How we use it', p:'Your information is used solely to respond to your enquiry, arrange viewings, share project updates you have asked for, and improve our services. We never sell your data to third parties.'},
+          {h:'Data retention & security', p:'We retain enquiry data only as long as necessary to serve you, and protect it with industry-standard safeguards. You may request access to, correction of, or deletion of your data at any time by writing to privacy@stableevershine.com.'},
+          {h:'Cookies', p:'Our website uses essential and analytics cookies to function and to understand usage. You can control cookies through your browser settings at any time.'}
+        ]
+      },
+      terms: {
+        eyebrow:'Legal', hero:'',
+        title:'Terms & Conditions.',
+        intro:'The terms governing your use of this website and the information presented on it.',
+        legal:[
+          {h:'Use of this website', p:'This website is provided for general information about Stable Evershine and its projects. By using it you agree to do so lawfully and not to misuse, copy or redistribute its content without permission.'},
+          {h:'Indicative information', p:'Renders, plans, dimensions, amenities and pricing shown here are indicative and for illustration only. They do not constitute a legal offer, contract or guarantee. Final particulars are governed solely by the registered agreement for sale.'},
+          {h:'Intellectual property', p:'All content, imagery and branding on this website are the property of Stable Evershine and may not be reproduced without written consent.'},
+          {h:'Limitation of liability', p:'While we strive for accuracy, Stable Evershine is not liable for any errors, omissions or decisions made in reliance on information presented on this website.'}
+        ]
+      },
+      rera: {
+        eyebrow:'Legal', hero:'',
+        title:'RERA Disclosures.',
+        intro:'Regulatory information for our projects, in line with the Real Estate (Regulation and Development) Act, 2016.',
+        legal:[
+          {h:'Kinara — Andheri West', p:'RERA Registration No. P5180000XXXXX. Registered with the Maharashtra Real Estate Regulatory Authority. Details available at maharera.mahaonline.gov.in. This is an indicative disclosure; please verify the current registration before any transaction.'},
+          {h:'Evershine Avenue — Powai', p:'RERA Registration No. P5180000YYYYY. Registered with the Maharashtra Real Estate Regulatory Authority. Details available at maharera.mahaonline.gov.in.'},
+          {h:'Disclaimer', p:'The information on this website is for general guidance and is subject to change. All sales are governed strictly by the registered agreement and the disclosures filed with the authority. Purchasers are advised to verify all particulars independently before booking.'}
+        ]
+      }
+    };
+    const pageKey = this.state.pageKey;
+    const pageOpen = !!pageKey;
+    const page = PAGES[pageKey] || PAGES.about;
+    const pageSections = (page.sections || []).map((s, i) => {
+      const flip = i % 2 === 1;
+      return {
+        h:s.h, p:s.p, img:s.img,
+        rowStyle:{ display:'flex', flexDirection: flip ? 'row-reverse' : 'row', flexWrap:'wrap', gap:'clamp(24px,4vw,60px)', alignItems:'center', borderTop:'1px solid rgba(11,19,37,.08)', paddingTop:'clamp(30px,4vw,52px)' },
+        textWrap:{ flex:'1 1 320px', minWidth:'280px' },
+        imgWrap:{ flex:'1 1 380px', minWidth:'280px', position:'relative', transformStyle:'preserve-3d' },
+        imgStyle:{ width:'100%', height:'clamp(260px,30vw,380px)', objectFit:'cover', borderRadius:'10px', boxShadow:'0 44px 80px -50px rgba(11,19,37,.5)' }
+      };
+    });
+    const pageWrapStyle = {
+      position:'fixed', inset:0, zIndex:120, overflowY:'auto', overflowX:'hidden',
+      WebkitOverflowScrolling:'touch', background:'var(--se-bg)',
+      opacity: this.state.pageLeaving ? 0 : 1,
+      transform: this.state.pageLeaving ? 'translateY(22px) scale(.992)' : 'none',
+      transition:'opacity .44s ease, transform .48s cubic-bezier(.16,1,.3,1)'
+    };
+    const pageHasChips = !!(page.chips && page.chips.length);
+    const pageHasBanner = !!page.hero;
+    const pageHasStats = !!(page.stats && page.stats.length);
+    const pageCards = (page.cards || []).map(c => ({ ...c, open:_mkOpen(c.key) }));
+    const pageHasCards = pageCards.length > 0;
+    const pageHasSections = !!(page.sections && page.sections.length);
+    const pageAmen = page.amen || [];
+    const pageHasAmen = pageAmen.length > 0;
+    const pageFloor = page.floor || [];
+    const pageHasFloor = pageFloor.length > 0;
+    const pageGallery = page.gallery || [];
+    const pageHasGallery = pageGallery.length > 0;
+    const pageLoc = page.loc || [];
+    const pageHasLoc = pageLoc.length > 0;
+    const pagePosts = page.posts || [];
+    const pageHasPosts = pagePosts.length > 0;
+    const pageLegal = page.legal || [];
+    const pageHasLegal = pageLegal.length > 0;
+    const pageForm = page.form || {};
+    const pageHasForm = !!page.form;
+    const pageIsBook = pageKey === 'book';
+
+    const selectStyle = { border:0, background:'transparent', fontFamily:'inherit', fontSize:'15px', fontWeight:500, color:'#0B1325', cursor:'pointer', outline:'none', padding:0, marginLeft:'-1px', width:'100%' };
+    const pillStyle = { fontSize:'13px', fontWeight:500, color:'#7a5b1e', background:'linear-gradient(135deg,rgba(212,175,55,.1),rgba(240,220,160,.18))', border:'1px solid rgba(212,175,55,.2)', padding:'9px 18px', borderRadius:'9999px' };
+
+    const amenCap = { position:'absolute', left:0, right:0, bottom:0, padding:'26px 26px 24px', color:'#FAF8F3', background:'linear-gradient(0deg,rgba(7,12,24,.82),rgba(7,12,24,.2) 60%,transparent)' };
+    const amenCapSm = { position:'absolute', left:0, right:0, bottom:0, padding:'20px', color:'#FAF8F3', background:'linear-gradient(0deg,rgba(7,12,24,.8),transparent)' };
+
+    // featured project tabs
+    const panels = {
+      'Overview': { body:'Kinara rises as a sculpted landmark where glass, stone and light meet the waterline. Two homes per floor, generous frontage and a triple-height arrival set the tone for a quieter, more considered way of living.', list:['Two apartments per floor for total privacy','Triple-height arrival lobby in marble & brass','Landscaped sky garden with open-air screen','100% power backup, EV-ready parking'] },
+      'Highlights': { body:'Every residence is delivered with a specification usually reserved for the floors above the penthouse line.', list:['Imported marble flooring in living spaces','Floor-to-ceiling glazing for sunrise light','VRV climate control & smart-home wiring','Branded modular kitchens & wardrobes'] },
+      'Floor Plans': { body:'Efficient, light-led layouts with minimal circulation and wide, framed views. Detailed unit plans are available on request.', list:['2 BHK · 780 – 940 ft² carpet','3 BHK · 1,180 – 1,360 ft² carpet','4 BHK · 1,520 – 1,640 ft² carpet','Corner units with wrap-around balconies'] },
+      'Connectivity': { body:'A genuinely connected address — business districts, schools and the coastline are all within an easy drive.', list:['Metro station — 6 min','International school — 8 min','Business park — 12 min','Seafront promenade — 15 min'] }
+    };
+    const tabKeys = ['Overview','Highlights','Floor Plans','Connectivity'];
+    const tabBase = { cursor:'pointer', fontFamily:'inherit', fontSize:'13px', fontWeight:600, letterSpacing:'.02em', padding:'10px 16px', borderRadius:'9999px', transition:'all .3s' };
+    const projectTabs = tabKeys.map(k => ({
+      label:k,
+      onClick:() => this.setState({ tab:k }),
+      style: this.state.tab === k
+        ? { ...tabBase, color:'#0B1325', border:'1px solid transparent', background:'var(--se-grad)' }
+        : { ...tabBase, color:'rgba(250,248,243,.66)', border:'1px solid rgba(250,248,243,.22)', background:'transparent' }
+    }));
+    const projectPanel = panels[this.state.tab] || panels['Overview'];
+
+    const connectivity = [
+      { tag:'Transit', name:'Metro Station', time:'6 min' },
+      { tag:'Transit', name:'International Airport', time:'28 min' },
+      { tag:'Work', name:'Central Business Park', time:'12 min' },
+      { tag:'Learn', name:'International School', time:'8 min' },
+      { tag:'Care', name:'Multi-speciality Hospital', time:'10 min' },
+      { tag:'Leisure', name:'Seafront Promenade', time:'15 min' }
+    ];
+
+    // newsroom
+    const news = [
+      { cat:'Brand', title:'The philosophy of light: designing homes around the sunrise', date:'Jun 2026', read:'5 min read', img:'assets/aerial-rooftop.jpg' },
+      { cat:'Projects', title:'Kinara tops out — a new landmark rises on the waterline', date:'May 2026', read:'3 min read', img:'assets/tower-day.jpg' },
+      { cat:'Lifestyle', title:'Inside the residences: the materials made to endure', date:'May 2026', read:'4 min read', img:'assets/bedroom.jpg' },
+      { cat:'Press', title:'Stable Evershine featured among India\u2019s design-led developers', date:'Apr 2026', read:'2 min read', img:'assets/lobby.jpg' },
+      { cat:'Lifestyle', title:'Amenities that quietly give your time back', date:'Apr 2026', read:'4 min read', img:'assets/gym.jpg' },
+      { cat:'Projects', title:'Our 2027 delivery roadmap, in the open', date:'Mar 2026', read:'3 min read', img:'assets/banquet.jpg' }
+    ];
+    const cats = ['All','Brand','Projects','Lifestyle','Press'];
+    const fBase = { cursor:'pointer', fontFamily:'inherit', fontSize:'13px', fontWeight:600, letterSpacing:'.02em', padding:'10px 18px', borderRadius:'9999px', transition:'all .3s' };
+    const newsFilters = cats.map(c => ({
+      label:c,
+      onClick:() => this.setState({ filter:c }),
+      style: this.state.filter === c
+        ? { ...fBase, color:'#0B1325', border:'1px solid transparent', background:'var(--se-grad)' }
+        : { ...fBase, color:'#4A5568', border:'1px solid rgba(43,43,43,.14)', background:'transparent' }
+    }));
+    const filteredNews = this.state.filter === 'All' ? news : news.filter(n => n.cat === this.state.filter);
+
+    const footHead = { fontSize:'11px', fontWeight:600, letterSpacing:'.2em', textTransform:'uppercase', color:'var(--se-hi)', marginBottom:'20px' };
+    const footLink = { color:'rgba(250,248,243,.7)', textDecoration:'none', fontSize:'14px', transition:'color .25s' };
+    const socialDot = { width:'38px', height:'38px', borderRadius:'9999px', border:'1px solid rgba(250,248,243,.18)', display:'flex', alignItems:'center', justifyContent:'center', fontSize:'12px', color:'rgba(250,248,243,.7)', cursor:'pointer' };
+
+    const fieldLabel = { display:'flex', flexDirection:'column', gap:'7px', fontSize:'11px', fontWeight:600, letterSpacing:'.12em', textTransform:'uppercase', color:'#8a8278' };
+    const fieldLabelWide = { ...fieldLabel, gridColumn:'span 2' };
+    const inputStyle = { fontFamily:'inherit', fontSize:'15px', color:'#0B1325', padding:'13px 15px', border:'1px solid rgba(43,43,43,.16)', borderRadius:'8px', background:'#fff', outline:'none', width:'100%', boxSizing:'border-box' };
+    const textareaStyle = { ...inputStyle, resize:'vertical', fontFamily:'inherit' };
+
+    const navLink = navLinkStyle;
+    const projectsList = [
+      { key:'kinara', img:'assets/tower-day.jpg', status:'Now Selling', loc:'Andheri West', name:'Kinara', sub:'/ Waterline', desc:'Two homes per floor, framed sunrise views and a triple-height marble arrival on the waterline.', config:'2/3/4 BHK', price:'₹2.4 Cr', open:this.openKinara },
+      { key:'evershine', img:'assets/hero-tower-night.jpg', status:'New Launch', loc:'Powai', name:'Evershine Avenue', sub:'/ Lakeside', desc:'A lakeside tower of light-led homes wrapped in green, with a sky club above the treeline.', config:'2/3 BHK', price:'₹1.8 Cr', open:this.openEvershine }
+    ];
+    const whyPoints = [
+      { n:'01', h:'Built around light', p:'Every home is oriented to the sun, so your day starts gently and softens at dusk — light is the first material we design with.' },
+      { n:'02', h:'Two homes per floor', p:'Privacy by design. Generous frontage, framed views and no shared walls you can hear through.' },
+      { n:'03', h:'Specification that endures', p:'Imported stone, branded fittings and systems chosen for how they behave in year fifteen, not week one.' },
+      { n:'04', h:'On-time, in the open', p:'Transparent roadmaps and a 100% on-time delivery record. We would rather lose a sale than your trust.' },
+      { n:'05', h:'Amenities that give time back', p:'Sky gardens, wellness and concierge — every amenity is judged by whether it quietly hands you more of your day.' },
+      { n:'06', h:'A name kept in stone', p:'Eighteen years, 12,000+ families and a 4.9 owner rating. We build for the families who return for their second address.' }
+    ];
+    const lifestyleTags = ['Sky gardens','Concierge','Infinity pool','Signature gym','Private dining','Walkable cores'];
+    const testimonials = [
+      { q:'We have owned three homes in the city; none feel like this one. The light through the morning is something you cannot photograph — you have to live in it.', n:'Ananya & Vikram Rao', d:'Kinara · 3 BHK owner', in:'AR' },
+      { q:'What sold us was the honesty. Clear timelines, no surprises, and a team that answered every question before we asked it.', n:'Imran Sheikh', d:'Evershine Avenue · 2 BHK owner', in:'IS' },
+      { q:'Two years in, the detail still holds up — the brass, the stone, the quiet. It was built to last, and it shows.', n:'Meera Nair', d:'Evershine resident since 2024', in:'MN' }
+    ];
+
+    return {
+      navStyle, navLinkStyle, navLink, navLinkHover, navShimmerStyle, navGlowStyle, navProjects, navAbout, navNewsroom, navCareers, navContact, loading:this.state.loading, introBloom, introSweep, loaderStyle, scrollPct:(this.state.scrollPct||'0%'), searchBarStyle, searchInputStyle, navSearch:this.navSearch, logoTextStyle, burgerLine,
+      aboutOpen:this.state.aboutOpen, openAbout:this.openAbout, closeAbout:this.closeAbout, toggleAbout:this.toggleAbout, aboutItems,
+      projectsOpen:this.state.projectsOpen, openProjects:this.openProjects, closeProjects:this.closeProjects, projectsItems,
+      pageOpen, page, pageSections, pageWrapStyle, openAboutPage:this.openAboutPage, openAboutPageMobile:this.openAboutPageMobile, closePage:this.closePage,
+      openProjectsPage:this.openProjectsPage, openKinara:this.openKinara, openEvershine:this.openEvershine, openLifestyle:this.openLifestyle, openGallery:this.openGallery, openBlogs:this.openBlogs, openContact:this.openContact, openBook:this.openBook, openBookMobile:this.openBookMobile, openCsr:this.openCsr, openCareers:this.openCareers, openPrivacy:this.openPrivacy, openTerms:this.openTerms, openRera:this.openRera,
+      pageHasChips, pageHasBanner, pageHasStats, pageHasCards, pageCards, pageHasSections, pageHasAmen, pageAmen, pageHasFloor, pageFloor, pageHasGallery, pageGallery, pageHasLoc, pageLoc, pageHasPosts, pagePosts, pageHasLegal, pageLegal, pageHasForm, pageForm, pageIsBook,
+      projectsList, whyPoints, lifestyleTags, testimonials,
+      mobileOpen:this.state.mobileOpen, toggleMobile:this.toggleMobile, closeMobile:this.closeMobile,
+      modalOpen:this.state.modalOpen, openModal:this.openModal, openModalMobile:this.openModalMobile, closeModal:this.closeModal,
+      sent:this.state.sent, notSent:!this.state.sent, submitForm:this.submitForm, stop:this.stop,
+      selectStyle, pillStyle, amenCap, amenCapSm,
+      projectTabs, projectPanel, connectivity,
+      newsFilters, filteredNews,
+      footHead, footLink, socialDot, fieldLabel, fieldLabelWide, inputStyle, textareaStyle
+    };
+  }
+}
+</script>
+</body>
+</html>
