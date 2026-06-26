@@ -40,6 +40,7 @@
   @keyframes seShimmer{0%{background-position:-160% 0}100%{background-position:260% 0}}
   @keyframes seNavShimmer{0%{background-position:-150% 0}100%{background-position:250% 0}}
   @keyframes seHeroVid{from{transform:scale(1.10)}to{transform:scale(1.04)}}
+  @keyframes seCharIn{from{opacity:0;transform:translateX(-18px)}to{opacity:1;transform:translateX(0)}}
   @keyframes seOverlayIn{from{opacity:0}to{opacity:1}}
   @keyframes seDrawerIn{from{transform:translateX(100%)}to{transform:translateX(0)}}
   @keyframes seMenuIn{from{opacity:0;transform:translateX(-30%) translateY(-8px)}to{opacity:1;transform:translateX(-30%) translateY(0)}}
@@ -472,24 +473,26 @@
       <video id="se-hero-video" poster="assets/hero-tower-night.jpg" autoplay muted loop playsinline preload="auto" tabindex="-1" aria-hidden="true" style="width:100%;height:100%;object-fit:cover;transform:scale(1.04);transform-origin:50% 50%;animation:seHeroVid 7s cubic-bezier(.16,1,.3,1) forwards"><source src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260403_050628_c4e32401-fab4-4a27-b7a8-6e9291cd5959.mp4" type="video/mp4"/></video>
       <div id="se-wm-mask" aria-hidden="true" style="position:absolute;right:9%;top:76%;width:9%;height:12%;border-radius:50%;background:radial-gradient(closest-side,rgba(22,19,17,.55),rgba(22,19,17,0) 80%);backdrop-filter:blur(9px);-webkit-backdrop-filter:blur(9px);opacity:0;transition:opacity .55s ease;pointer-events:none"></div>
     </div>
-    <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(7,12,24,.62) 0%,rgba(7,12,24,.18) 34%,rgba(7,12,24,.30) 62%,rgba(7,12,24,.86) 100%)"></div>
-    <div data-parallax="0.14" style="position:absolute;left:-12%;bottom:-22%;width:62%;height:62%;background:radial-gradient(circle,rgba(212,175,55,.42),rgba(240,220,160,.14) 42%,transparent 66%);filter:blur(20px);pointer-events:none"></div>
+    <div data-parallax="0.14" style="position:absolute;left:-12%;bottom:-22%;width:62%;height:62%;background:radial-gradient(circle,rgba(212,175,55,.22),rgba(240,220,160,.08) 42%,transparent 66%);filter:blur(20px);pointer-events:none;mix-blend-mode:screen"></div>
 
     <div aria-hidden="true" style="position:absolute;inset:0;z-index:2;pointer-events:none;overflow:hidden">
-      <div style="position:absolute;top:-25%;left:6%;width:20%;height:150%;background:linear-gradient(180deg,rgba(240,220,160,.18),transparent 68%);filter:blur(8px);transform:skewX(-12deg);mix-blend-mode:screen;animation:seRayDrift 14s ease-in-out infinite"></div>
-      <div style="position:absolute;top:-25%;left:30%;width:15%;height:150%;background:linear-gradient(180deg,rgba(212,175,55,.16),transparent 70%);filter:blur(10px);transform:skewX(-12deg);mix-blend-mode:screen;animation:seRayDrift 18s ease-in-out infinite reverse"></div>
-      <div style="position:absolute;top:-25%;right:12%;width:18%;height:150%;background:linear-gradient(180deg,rgba(240,220,160,.13),transparent 68%);filter:blur(9px);transform:skewX(-12deg);mix-blend-mode:screen;animation:seRayDrift 21s ease-in-out infinite"></div>
-      <div style="position:absolute;left:-12%;bottom:-32%;width:72%;height:82%;background:radial-gradient(circle,transparent,rgba(7,12,24,.5) 70%);filter:blur(22px);animation:seFog 24s ease-in-out infinite"></div>
+      <div style="position:absolute;top:-25%;left:6%;width:20%;height:150%;background:linear-gradient(180deg,rgba(240,220,160,.16),transparent 68%);filter:blur(8px);transform:skewX(-12deg);mix-blend-mode:screen;animation:seRayDrift 14s ease-in-out infinite"></div>
+      <div style="position:absolute;top:-25%;left:30%;width:15%;height:150%;background:linear-gradient(180deg,rgba(212,175,55,.14),transparent 70%);filter:blur(10px);transform:skewX(-12deg);mix-blend-mode:screen;animation:seRayDrift 18s ease-in-out infinite reverse"></div>
+      <div style="position:absolute;top:-25%;right:12%;width:18%;height:150%;background:linear-gradient(180deg,rgba(240,220,160,.11),transparent 68%);filter:blur(9px);transform:skewX(-12deg);mix-blend-mode:screen;animation:seRayDrift 21s ease-in-out infinite"></div>
       <canvas id="se-particles" style="position:absolute;inset:0;width:100%;height:100%"></canvas>
     </div>
 
     <div id="se-hero-content" style="position:relative;z-index:3;max-width:1320px;margin:0 auto;width:100%;padding:0 clamp(24px,6vw,96px) clamp(120px,15vh,170px)">
       <div class="reveal in" style="display:flex;align-items:center;gap:14px;margin-bottom:26px">
         <span style="width:42px;height:2px;background:var(--se-grad)"></span>
-        <span style="font-size:12px;font-weight:600;letter-spacing:.34em;text-transform:uppercase;color:var(--se-hi)">A Stable Evershine Address</span>
+        <span style="font-size:12px;font-weight:600;letter-spacing:.34em;text-transform:uppercase;color:var(--se-hi);text-shadow:0 1px 12px rgba(0,0,0,.55)">A Stable Evershine Address</span>
       </div>
-      <h1 class="reveal in d1" style="margin:0;max-width:16ch;color:#FAF8F3;font-weight:300;font-size:clamp(40px,6.4vw,86px);line-height:1.02;letter-spacing:-.025em;text-wrap:balance">Where every sunrise begins a <span style="font-weight:600;background:var(--se-grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent">new chapter</span>.</h1>
-      <p class="reveal in d2" style="margin:28px 0 0;max-width:54ch;color:rgba(250,248,243,.82);font-size:clamp(16px,1.5vw,19px);line-height:1.7;font-weight:300">Limited-edition residences shaped around light, craft and a calmer way of living — a brighter address built on growth, trust and prosperity.</p>
+      <h1 style="margin:0;max-width:16ch;color:#FAF8F3;font-weight:300;font-size:clamp(40px,6.4vw,86px);line-height:1.02;letter-spacing:-.035em;text-wrap:balance">
+        <sc-for list="{{ heroLines }}" as="hl" hint-placeholder-count="2">
+          <span style="display:block"><sc-for list="{{ hl.chars }}" as="hc" hint-placeholder-count="12"><span style="{{ hc.st }}">{{ hc.ch }}</span></sc-for></span>
+        </sc-for>
+      </h1>
+      <p class="reveal in d2" style="margin:28px 0 0;max-width:54ch;color:#FAF8F3;font-size:clamp(16px,1.5vw,19px);line-height:1.7;font-weight:300;text-shadow:0 1px 16px rgba(0,0,0,.6),0 1px 4px rgba(0,0,0,.55)">Limited-edition residences shaped around light, craft and a calmer way of living — a brighter address built on growth, trust and prosperity.</p>
       <div class="reveal in d3" style="display:flex;flex-wrap:wrap;gap:16px;margin-top:40px">
         <a href="#projects" style="text-decoration:none;font-size:14.5px;font-weight:600;letter-spacing:.02em;color:#0B1325;padding:16px 30px;border-radius:9999px;background:var(--se-grad);box-shadow:0 18px 44px -18px rgba(212,175,55,.7)" style-hover="filter:brightness(1.06);transform:translateY(-2px)">Explore Residences</a>
         <button onClick="{{ openModal }}" style="cursor:pointer;font-family:inherit;font-size:14.5px;font-weight:500;letter-spacing:.02em;color:#FAF8F3;padding:16px 30px;border-radius:9999px;background:rgba(250,248,243,.06);border:1px solid rgba(250,248,243,.4);backdrop-filter:blur(6px)" style-hover="background:rgba(250,248,243,.14);border-color:rgba(250,248,243,.7)">Enquire Now</button>
@@ -1624,6 +1627,34 @@ class Component extends DCLogic {
     const inputStyle = { fontFamily:'inherit', fontSize:'15px', color:'#0B1325', padding:'13px 15px', border:'1px solid rgba(43,43,43,.16)', borderRadius:'8px', background:'#fff', outline:'none', width:'100%', boxSizing:'border-box' };
     const textareaStyle = { ...inputStyle, resize:'vertical', fontFamily:'inherit' };
 
+    // hero character-reveal heading
+    const _hcDelay = 30, _hcInit = 200, _hcDur = 500;
+    const _hLines = [
+      { text:'Where every sunrise begins', goldFrom:null },
+      { text:'a new chapter.', goldFrom:2 }
+    ];
+    const _lineLen = _hLines[0].text.length;
+    const heroLines = _hLines.map((ln, li) => ({
+      chars: ln.text.split('').map((ch, ci) => {
+        const delay = _hcInit + (li * _lineLen * _hcDelay) + (ci * _hcDelay);
+        const gold = ln.goldFrom != null && ci >= ln.goldFrom;
+        const st = {
+          display:'inline-block', whiteSpace:'pre',
+          opacity:0, transform:'translateX(-18px)',
+          animation:'seCharIn ' + _hcDur + 'ms cubic-bezier(.16,1,.3,1) forwards',
+          animationDelay: delay + 'ms'
+        };
+        if (gold) {
+          st.background = 'var(--se-grad)'; st.WebkitBackgroundClip = 'text'; st.backgroundClip = 'text';
+          st.WebkitTextFillColor = 'transparent'; st.color = 'transparent'; st.fontWeight = 600;
+          st.filter = 'drop-shadow(0 3px 10px rgba(0,0,0,.5))';
+        } else {
+          st.textShadow = '0 2px 22px rgba(0,0,0,.5), 0 1px 4px rgba(0,0,0,.55)';
+        }
+        return { ch: ch === ' ' ? '\u00A0' : ch, st };
+      })
+    }));
+
     const navLink = navLinkStyle;
     const projectsList = [
       { key:'kinara', img:'assets/tower-day.jpg', status:'Now Selling', loc:'Andheri West', name:'Kinara', sub:'/ Waterline', desc:'Two homes per floor, framed sunrise views and a triple-height marble arrival on the waterline.', config:'2/3/4 BHK', price:'₹2.4 Cr', open:this.openKinara },
@@ -1651,7 +1682,7 @@ class Component extends DCLogic {
       pageOpen, page, pageSections, pageWrapStyle, openAboutPage:this.openAboutPage, openAboutPageMobile:this.openAboutPageMobile, closePage:this.closePage,
       openProjectsPage:this.openProjectsPage, openKinara:this.openKinara, openEvershine:this.openEvershine, openLifestyle:this.openLifestyle, openGallery:this.openGallery, openBlogs:this.openBlogs, openContact:this.openContact, openBook:this.openBook, openBookMobile:this.openBookMobile, openCsr:this.openCsr, openCareers:this.openCareers, openPrivacy:this.openPrivacy, openTerms:this.openTerms, openRera:this.openRera,
       pageHasChips, pageHasBanner, pageHasStats, pageHasCards, pageCards, pageHasSections, pageHasAmen, pageAmen, pageHasFloor, pageFloor, pageHasGallery, pageGallery, pageHasLoc, pageLoc, pageHasPosts, pagePosts, pageHasLegal, pageLegal, pageHasForm, pageForm, pageIsBook,
-      projectsList, whyPoints, lifestyleTags, testimonials,
+      projectsList, whyPoints, lifestyleTags, testimonials, heroLines,
       mobileOpen:this.state.mobileOpen, toggleMobile:this.toggleMobile, closeMobile:this.closeMobile,
       modalOpen:this.state.modalOpen, openModal:this.openModal, openModalMobile:this.openModalMobile, closeModal:this.closeModal,
       sent:this.state.sent, notSent:!this.state.sent, submitForm:this.submitForm, stop:this.stop,
